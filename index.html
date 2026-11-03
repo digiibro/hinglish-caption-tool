@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digii Bro Hinglish Caption Tool — Animated Hinglish Captions for Reels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@500;700;800;900&family=Inter:wght@400;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,600;1,800&family=Caveat:wght@700&family=Poppins:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;background:#0c0d10;color:#f2f2f2}
+  header{padding:22px 26px 6px;max-width:1180px;margin:auto}
+  h1{font-family:Montserrat,sans-serif;font-weight:900;font-size:30px;margin:0}
+  h1 span{color:#ffd400}
+  .verbadge{display:inline-block;vertical-align:middle;font-family:Inter,system-ui,sans-serif;font-size:11px;font-weight:700;color:#0c0d10;background:#ffd400;border-radius:999px;padding:3px 10px;margin-left:10px;letter-spacing:.4px}
+  .sub{color:#aeb3ba;margin:6px 0 0;font-size:14.5px;line-height:1.55;max-width:760px}
+  main{max-width:1180px;margin:auto;padding:18px 26px 60px;display:grid;grid-template-columns:380px 1fr;gap:22px}
+  @media(max-width:900px){main{grid-template-columns:1fr}}
+  .card{background:#15171c;border:1px solid #262a31;border-radius:16px;padding:18px;margin-bottom:18px}
+  .card h2{font-size:15px;margin:0 0 4px;font-family:Montserrat,sans-serif}
+  .card p.hint{color:#9aa1ab;font-size:12.5px;margin:0 0 12px;line-height:1.5}
+  label{font-size:12.5px;font-weight:600;color:#c9ced6;display:block;margin:12px 0 6px}
+  select,input[type=text]{width:100%;background:#0e1013;border:1px solid #2c3038;border-radius:10px;color:#fff;padding:10px 11px;font-size:14px}
+  textarea{width:100%;min-height:130px;background:#0e1013;border:1px solid #2c3038;border-radius:10px;color:#fff;padding:11px;font-size:14.5px;line-height:1.55;resize:vertical}
+  button{cursor:pointer;border:0;border-radius:11px;padding:12px 16px;font-weight:700;font-size:14.5px;background:#ffd400;color:#111;width:100%;margin-top:10px}
+  button.secondary{background:#24272e;color:#f2f2f2}
+  button.danger{background:#e10600;color:#fff}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  .drop{border:1.6px dashed #3a3f49;border-radius:12px;padding:20px;text-align:center;color:#aeb3ba;font-size:13.5px;cursor:pointer}
+  .drop.over{border-color:#ffd400;color:#ffd400}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .status{font-size:12.5px;color:#9fe870;min-height:18px;margin-top:8px;line-height:1.5;white-space:pre-wrap}
+  .status.err{color:#ff7a72}
+  progress{width:100%;height:8px;accent-color:#ffd400}
+  .stagewrap{background:#15171c;border:1px solid #262a31;border-radius:16px;padding:18px}
+  .stagebox{width:100%;background:#000;border-radius:12px;overflow:hidden}
+  .stagebox.checker{background:repeating-conic-gradient(#33363d 0% 25%, #1e2025 0% 50%) 0 0/30px 30px}
+  .tabs{display:flex;gap:10px;max-width:1180px;margin:14px auto 0;padding:0 26px}
+  .tabbtn{flex:1;padding:14px;border-radius:14px;border:1px solid #2c3038;background:#15171c;color:#c9ced6;font-family:Montserrat,sans-serif;font-weight:800;font-size:16px;cursor:pointer}
+  .tabbtn.sel{background:#ffd400;color:#111;border-color:#ffd400}
+  .scenelist{max-height:430px;overflow:auto;display:flex;flex-direction:column;gap:8px}
+  .scenerow{background:#0e1013;border:2px solid #2c3038;border-radius:12px;padding:9px 10px}
+  .scenerow.sel{border-color:#ffd400}
+  .scenerow .stitle{font-size:12.5px;font-weight:700;line-height:1.45;cursor:pointer}
+  .scenerow .srow2{display:flex;gap:6px;margin-top:7px;flex-wrap:wrap}
+  .scenerow select{width:auto;flex:1;padding:7px 8px;font-size:12px}
+  .scenerow button{width:auto;margin:0;padding:7px 10px;font-size:12px;border-radius:8px}
+  .edstylegrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .edcard{background:#0e1013;border:2px solid #2c3038;border-radius:12px;padding:7px;color:#fff;width:100%;margin:0;font-size:12.5px;text-align:left;cursor:pointer}
+  .edcard.sel{border-color:#ffd400;box-shadow:0 0 0 1px #ffd400}
+  .edcard .pv{height:64px;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:5px;text-align:center;line-height:1.15}
+  .edcard .sname{font-weight:700;margin-top:7px;font-size:12.5px}
+  .edcard small{display:block;color:#9aa1ab;font-weight:400;margin-top:2px;font-size:11px;line-height:1.4}
+  .edcat{grid-column:1/-1;font-family:Montserrat,sans-serif;font-weight:800;font-size:12.5px;color:#ffd400;margin-top:8px;letter-spacing:.3px}
+  canvas#stage{width:100%;display:block}
+  canvas#edstage{width:100%;display:block;height:auto}
+  .stagewrap{position:sticky;top:12px}
+  #edstage{cursor:pointer}
+  #edwordbar{display:none;gap:6px;flex-wrap:wrap;align-items:center;margin-top:10px;background:#171a21;border:1px solid #262b36;border-radius:10px;padding:8px}
+  #edwordbar button{padding:6px 10px;font-size:13px}
+  .transport{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}
+  .transport button{width:auto;margin:0;padding:11px 18px}
+  .time{font-variant-numeric:tabular-nums;color:#c9ced6;font-size:13.5px}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+  .chip{font-size:11.5px;background:#24272e;border:1px solid #33373f;padding:5px 9px;border-radius:99px;color:#c9ced6}
+  .stylegrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .stylegrid{grid-template-columns:1fr 1fr}
+  .stylecard{background:#0e1013;border:2px solid #2c3038;border-radius:12px;padding:7px;color:#fff;width:100%;margin:0;font-size:12.5px;text-align:left}
+  .stylecard.sel{border-color:#ffd400;box-shadow:0 0 0 1px #ffd400}
+  .stylecard .pv{height:84px;border-radius:8px;background:linear-gradient(135deg,#1d2027,#0b0c0f);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:5px;text-align:center;line-height:1.12}
+  .stylecard .pv .pvsmall{font-size:10.5px;margin-bottom:3px}
+  .stylecard .pv .pvbig{font-size:21px;white-space:nowrap}
+  .stylecard .pv .pvkw{padding:0 5px}
+  .stylecard .sname{font-weight:700;margin-top:7px;font-size:12.5px;line-height:1.3}
+  .stylecard small{display:block;color:#9aa1ab;font-weight:400;margin-top:2px;line-height:1.4;font-size:11px}
+  input[type=range]{width:100%}
+  .kbd{background:#24272e;padding:1px 6px;border-radius:5px;font-size:12px}
+  ol.how{color:#c9ced6;font-size:13.5px;line-height:1.75;padding-left:19px;margin:6px 0}
+
+  .socials{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 4px}
+  .socials a{display:inline-flex;align-items:center;gap:8px;background:#1b1b22;border:1.5px solid #33333f;color:#fff;text-decoration:none;font-weight:700;font-size:14.5px;padding:9px 16px;border-radius:999px;transition:.15s}
+  .socials a:hover{border-color:#ffd400;color:#ffd400;transform:translateY(-1px)}
+  .socials a small{color:#9a9aa6;font-weight:600}
+  .socials a:hover small{color:#ffd400}
+</style>
+</head>
+<body>
+<header>
+  <h1>Digii Bro <span>Hinglish Caption</span> Tool <span class="verbadge">Audience Edition</span></h1>
+  <p class="sub">Turn your <b>final voiceover</b> — or even faster, your <b>SRT file</b> (perfect timing, zero transcription wait) — into <b>animated Hinglish captions</b> in <b>28 trending styles</b> with smooth, After Effects-style motion: small words + <b>HUGE bold words</b> + a highlighted keyword, on a <b>green screen</b> — or with a <b>fully transparent background</b>, no chroma key needed. Then drop the caption video over your edit in CapCut. Everything is <b>completely free</b> — even transcription runs inside your browser. No API key, no sign-up, no cost.</p>
+  <div class="socials">
+    <a href="https://www.instagram.com/digiibro" target="_blank" rel="noopener">📸 Instagram <small>@digiibro</small></a>
+    <a href="https://www.tiktok.com/@digiibro" target="_blank" rel="noopener">🎵 TikTok <small>@digiibro</small></a>
+    <a href="https://whatsapp.com/channel/0029Vb9G4yDHgZWjqhp5Ub2B" target="_blank" rel="noopener">💬 WhatsApp Channel <small>Join Free</small></a>
+  </div>
+</header>
+<main id="mainCap">
+  <div>
+    <div class="card">
+      <h2>Step 1 — Upload Your Voiceover</h2>
+      <p class="hint">MP3 / WAV / M4A — the same final voiceover file you will use in your video.</p>
+      <div class="drop" id="drop">🎙️ Drop your audio file here<br>or click to choose</div>
+      <input type="file" id="file" accept="audio/*" hidden>
+      <audio id="player" controls style="width:100%;margin-top:12px"></audio>
+      <div class="chips" id="fileinfo"></div>
+    </div>
+
+    <div class="card">
+      <h2>Step 2 (Fastest Way) — Give an SRT File ⚡</h2>
+      <p class="hint">If you have an <b>SRT file from ElevenLabs / any tool</b>, this is the best option: you skip the entire transcription time
+      (~2–3 min for a 1.5 min voiceover, plus the one-time ~2–5 min model download), and the timing comes out <b>perfect</b> from the SRT — accurate to the millisecond.
+      As soon as you give the SRT, the captions sync automatically; only the Export takes real time.</p>
+      <button id="srtbtn">📄 Choose SRT File</button>
+      <input type="file" id="srtfile" accept=".srt,.txt" hidden>
+      <div class="status" id="srtstatus"></div>
+    </div>
+
+    <div class="card">
+      <h2>Step 2 (Second Way) — Auto Transcription (FREE)</h2>
+      <p class="hint">The Whisper AI model downloads into your browser (first time only, then it stays cached). Internet is needed the first time.
+      <b>Tip:</b> Keep the language <b>Hindi</b> — Hinglish conversion works best with it.</p>
+      <label>Model (bigger model = more accurate, slower download)</label>
+      <select id="model">
+        <option value="Xenova/whisper-tiny">Fast — Whisper Tiny (~40 MB)</option>
+        <option value="Xenova/whisper-base" selected>Better — Whisper Base (~145 MB)</option>
+        <option value="Xenova/whisper-small">Best — Whisper Small (~245 MB)</option>
+      </select>
+      <label>Voiceover language</label>
+      <select id="lang">
+        <option value="hindi" selected>Hindi (best for Hinglish)</option>
+        <option value="urdu">Urdu</option>
+        <option value="english">English</option>
+        <option value="">Auto detect</option>
+      </select>
+      <button id="transcribe">🎧 Transcribe</button>
+      <progress id="tprog" value="0" max="100" style="display:none"></progress>
+      <div class="status" id="tstatus"></div>
+      <label>Transcript (fix any mistakes here — or paste/type the whole text yourself, then press Sync in Step 3)</label>
+      <textarea id="transcript" placeholder="Your transcript will appear here... or type/paste it yourself, then press Sync in Step 3."></textarea>
+      <div class="row">
+        <button class="secondary" id="tohinglish">🔤 Convert to Hinglish (Roman)</button>
+        <button class="secondary" id="demo">✨ Fill Demo Text</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🎯 Voice Sync — What You Say Appears Exactly When You Say It</h2>
+      <p class="hint">Captions running early or late? This feature listens to your <b>actual audio</b>, extracts the exact timing of every word,
+      and <b>force-aligns</b> your text (or SRT text) onto it — whichever word is spoken at a moment appears in the caption at that same moment.
+      You need both the audio and a transcript/SRT. The Whisper model downloads on first use. All AI processing runs in the <b>background</b> — the tool never freezes while it works.</p>
+      <button id="voicesync">🎯 Voice Sync (Exact Timing from Audio)</button>
+      <progress id="vprog" value="0" max="100" style="display:none"></progress>
+      <div class="status" id="vstatus"></div>
+      <label>Sync offset — if all captions are equally early/late, fix them here (SRT and MP3 often differ slightly)</label>
+      <div class="row">
+        <button class="secondary" id="nudgeback">⏪ −0.1s (earlier)</button>
+        <button class="secondary" id="nudgefwd">⏩ +0.1s (later)</button>
+      </div>
+      <input type="range" id="offset" min="-200" max="200" value="0" step="5">
+      <div class="status" id="offval">Offset: 0.00s</div>
+      <button class="secondary" id="snap">⏸ Snap Words to Voice Pauses</button>
+    </div>
+
+    <div class="card">
+      <h2>Step 3 — Caption Settings</h2>
+      <label>Caption Mode</label>
+      <select id="mode">
+        <option value="viral" selected>🔥 Viral Mode — like Pinterest/viral edits (clean, short lines, only the keyword is huge, exact word reveal)</option>
+        <option value="typo">Typography Mode — like the first reference video (big typographic blocks, 3-font mix)</option>
+      </select>
+      <label>Caption Styles — select by preview (like CapCut, on this same screen)</label>
+      <div class="stylegrid" id="styles"></div>
+      <div class="row">
+        <div>
+          <label>Video format</label>
+          <select id="format">
+            <option value="1920x1080" selected>16:9 — 1920×1080 (YouTube)</option>
+            <option value="1080x1920">9:16 — 1080×1920 (Reels / Shorts)</option>
+            <option value="1080x1080">1:1 — 1080×1080</option>
+          </select>
+        </div>
+        <div>
+          <label>Background</label>
+          <select id="bg">
+            <option value="#00ff00" selected>Green Screen (chroma key)</option>
+            <option value="#ff00ff">Magenta (chroma key)</option>
+            <option value="#0000ff">Blue (chroma key)</option>
+            <option value="transparent">Transparent — No Background (WebM, no chroma key needed)</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Words per caption</label>
+          <select id="perchunk">
+            <option value="auto" selected>Auto — by phrase/SRT automatically (Viral ⭐)</option>
+            <option value="1">1 word</option>
+            <option value="2">2 words</option>
+            <option value="3">3 words</option>
+            <option value="4">4 words</option>
+            <option value="5">5 words</option>
+            <option value="6">6 words</option>
+            <option value="7">7 words</option>
+            <option value="8">8 words</option>
+            <option value="9">9 words</option>
+            <option value="10">10 words</option>
+          </select>
+        </div>
+        <div>
+          <label>Motion / Animation</label>
+          <select id="anim">
+            <option value="viral" selected>Viral Soft — gentle fade + rise, just like viral edits ⭐</option>
+            <option value="auto">Auto Mix — a different smooth motion for every caption</option>
+            <option value="spring">Spring — smooth like After Effects</option>
+            <option value="pop">Pop (like the reference)</option>
+            <option value="bounce">Bounce</option>
+            <option value="slide">Slide Up (smooth)</option>
+            <option value="wordpop">Word-by-Word Spring</option>
+            <option value="zoom">Smooth Zoom</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>Caption position</label>
+          <select id="pos">
+            <option value="center" selected>Center</option>
+            <option value="lower">Bottom (Lower)</option>
+            <option value="upper">Top (Upper)</option>
+          </select>
+        </div>
+        <div>
+          <label>Text size</label>
+          <input type="range" id="size" min="70" max="140" value="100">
+        </div>
+      </div>
+      <button id="sync">⚡ Sync Captions (Apply Timing)</button>
+      <div class="status" id="sstatus"></div>
+    </div>
+
+    <div class="card">
+      <h2>Step 4 — Export</h2>
+      <p class="hint">Export happens in real time — the longer the voiceover, the longer it takes. Do not close the tab during export.
+      You will get an MP4 (newer Chrome) or WebM file — both import into CapCut and every editor. With the <b>Transparent</b> background the file is always a transparent WebM: place it over any video, no chroma key needed.</p>
+      <div class="row" style="margin-bottom:10px">
+        <div>
+          <label>Export quality — speed</label>
+          <select id="expquality">
+            <option value="full" selected>Full HD (best quality)</option>
+            <option value="fast">⚡ Fast 720p — much quicker on slow PCs, slightly softer</option>
+          </select>
+        </div>
+        <div>
+          <label>💾 My Preset (style + settings)</label>
+          <div style="display:flex;gap:6px">
+            <button id="presetsave" class="secondary" style="flex:1">Save Preset</button>
+            <button id="presetapply" class="secondary" style="flex:1">Apply Preset</button>
+          </div>
+        </div>
+      </div>
+      <button id="export" class="danger">⬇️ Export Caption Video</button>
+      <button id="srt" class="secondary">⬇️ Also Download SRT Subtitle File</button>
+      <progress id="eprog" value="0" max="100" style="display:none"></progress>
+      <button id="exportcancel" class="secondary" style="display:none">⏹ Cancel Export</button>
+      <div class="status" id="estatus"></div>
+    </div>
+
+    <div class="card">
+      <h2>How to Use in CapCut</h2>
+      <ol class="how">
+        <li>Edit your main video in CapCut (the way you normally do).</li>
+        <li>Use <b>Overlay → Add Overlay</b> to place this caption video on the layer above.</li>
+        <li>Select the caption video → <b>Cutout → Chroma Key</b> → pick the green color → raise the Intensity. The green disappears, only the captions remain. (If you exported with the Transparent background, skip this step completely.)</li>
+        <li>If the timing is slightly off, slide the overlay a little forward/back.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div>
+    <div class="stagewrap">
+      <h2 style="margin:0 0 12px;font-family:Montserrat,sans-serif;font-size:16px">Live Preview</h2>
+      <div class="stagebox"><canvas id="stage" width="1920" height="1080"></canvas></div>
+      <div class="transport">
+        <button id="play">▶ Play Preview</button>
+        <button id="stop" class="secondary">⏹ Stop</button>
+        <span class="time" id="clock">0.0s / 0.0s</span>
+        <span class="time" id="curchunk"></span>
+      </div>
+      <p class="hint" style="color:#9aa1ab;font-size:12.5px;margin-top:12px;line-height:1.6">
+        Complete Steps 1–3 first, then press Play. The preview is on a small screen; the export will be full HD.
+        Writing any word as <span class="kbd">**word**</span> makes it always the highlighted BIG keyword — try it in the transcript.
+      </p>
+    </div>
+  </div>
+
+    <div class="card" style="text-align:center">
+      <p class="hint" style="margin:0">🎁 <b>Free forever</b> — made by <b>Digii Bro</b> for creators. Follow <a href="https://www.instagram.com/digiibro" target="_blank" rel="noopener" style="color:#ffd400;font-weight:700;text-decoration:none">@digiibro</a> on Instagram &amp; TikTok for more free tools.<br>Your files never leave your device — everything runs 100% in your browser.</p>
+    </div>
+</main>
+
+<script>
+"use strict";
+/* ============ helpers ============ */
+const $ = id => document.getElementById(id);
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const easeOutBack=t=>{const c=1.70158; t=clamp(t,0,1); return 1+(c+1)*Math.pow(t-1,3)+c*Math.pow(t-1,2);};
+const easeOutBounce=t=>{const n=7.5625,d=2.75; t=clamp(t,0,1); if(t<1/d)return n*t*t; if(t<2/d)return n*(t-=1.5/d)*t+.75; if(t<2.5/d)return n*(t-=2.25/d)*t+.9375; return n*(t-=2.625/d)*t+.984375;};
+const easeOutCubic=t=>1-Math.pow(1-clamp(t,0,1),3);
+const easeOutExpo=t=>t>=1?1:1-Math.pow(2,-10*clamp(t,0,1));
+const springEase=t=>{ t=clamp(t,0,1); return 1-Math.exp(-7.5*t)*Math.cos(11*t); }; // damped spring — overshoot karke smooth settle (After Effects jaisa)
+
+/* ============ Devanagari -> Hinglish (Roman) ============ */
+const DEVA_CONS={'क':'k','ख':'kh','ग':'g','घ':'gh','ङ':'ng','च':'ch','छ':'chh','ज':'j','झ':'jh','ञ':'ny','ट':'t','ठ':'th','ड':'d','ढ':'dh','ण':'n','त':'t','थ':'th','द':'d','ध':'dh','न':'n','प':'p','फ':'f','ब':'b','भ':'bh','म':'m','य':'y','र':'r','ल':'l','व':'v','श':'sh','ष':'sh','स':'s','ह':'h','़':'','क़':'q','ख़':'kh','ग़':'gh','ज़':'z','फ़':'f','ड़':'r','ढ़':'rh','ऱ':'r','ळ':'l','ज्ञ':'gy'};
+const DEVA_VOWEL={'अ':'a','आ':'aa','इ':'i','ई':'ee','उ':'u','ऊ':'oo','ए':'e','ऐ':'ai','ओ':'o','औ':'au','ऋ':'ri'};
+const DEVA_MATRA={'ा':'aa','ि':'i','ी':'ee','ु':'u','ू':'oo','े':'e','ै':'ai','ो':'o','ौ':'au','ृ':'ri','ॅ':'e','ॉ':'o'};
+function devaWordToRoman(word){
+  const ch=[...word]; const syl=[]; // {cons, vowel, inherent, suffix}
+  let i=0;
+  while(i<ch.length){
+    const c=ch[i];
+    if(DEVA_VOWEL[c]!==undefined){ syl.push({cons:'',vowel:DEVA_VOWEL[c],inherent:false,suffix:''}); i++; continue; }
+    if(DEVA_CONS[c]!==undefined){
+      let base=DEVA_CONS[c]; i++; let j=i;
+      if(ch[j]==='़'){ j++; }
+      if(ch[j]==='्'){ syl.push({cons:base,vowel:'',inherent:false,suffix:''}); i=j+1; continue; }
+      if(DEVA_MATRA[ch[j]]!==undefined){ syl.push({cons:base,vowel:DEVA_MATRA[ch[j]],inherent:false,suffix:''}); i=j+1; continue; }
+      syl.push({cons:base,vowel:'a',inherent:true,suffix:''}); i=j; continue;
+    }
+    if(c==='ं'||c==='ँ'){ if(syl.length)syl[syl.length-1].suffix+='n'; i++; continue; }
+    if(c==='ः'){ if(syl.length)syl[syl.length-1].suffix+='h'; i++; continue; }
+    if('०१२३४५६७८९'.includes(c)){ syl.push({cons:String('०१२३४५६७८९'.indexOf(c)),vowel:'',inherent:false,suffix:''}); i++; continue; }
+    syl.push({cons:c,vowel:'',inherent:false,suffix:''}); i++;
+  }
+  // Hinglish schwa deletion: word-final inherent 'a' drops (khuda->khud, fona->fon)
+  if(syl.length>1 && syl[syl.length-1].inherent) syl[syl.length-1].vowel='';
+  // medial: ka-ra-te -> karte (inherent 'a' drops when prev vowel is 'a' and next syllable has a full non-a vowel)
+  for(let k=1;k<syl.length-1;k++){
+    if(syl[k].inherent && syl[k-1].vowel==='a' && syl[k+1].vowel && syl[k+1].vowel!=='a') syl[k].vowel='';
+  }
+  return syl.map(s=>s.cons+s.vowel+s.suffix).join('');
+}
+function devaToRoman(s){
+  return s.split(/(\s+)/).map(part=>/[\u0900-\u097F]/.test(part)? part.split(/([^\u0900-\u097F]+)/).map(p=>/[\u0900-\u097F]/.test(p)?devaWordToRoman(p):p).join('') : part).join('');
+}
+/* ============ Urdu (Arabic script) -> Roman (approximate) ============ */
+const URDU_MAP={'ا':'a','آ':'aa','ب':'b','پ':'p','ت':'t','ٹ':'t','ث':'s','ج':'j','چ':'ch','ح':'h','خ':'kh','د':'d','ڈ':'d','ذ':'z','ر':'r','ڑ':'r','ز':'z','ژ':'zh','س':'s','ش':'sh','ص':'s','ض':'z','ط':'t','ظ':'z','ع':'a','غ':'gh','ف':'f','ق':'q','ک':'k','گ':'g','ل':'l','م':'m','ن':'n','ں':'n','و':'o','ہ':'h','ھ':'h','ی':'i','ے':'e','ئ':'i','ؤ':'o','ۃ':'t','ة':'h','ك':'k','ي':'i','ة':'h','ـ':''};
+function urduToRoman(s){ return [...s].map(c=>URDU_MAP[c]!==undefined?URDU_MAP[c]:(/[\u064B-\u0652]/.test(c)?'':c)).join(''); }
+function toHinglish(text){
+  if(/[\u0900-\u097F]/.test(text)) text=devaToRoman(text);
+  if(/[\u0600-\u06FF]/.test(text)) text=urduToRoman(text);
+  return text.replace(/\s+/g,' ').trim();
+}
+
+/* ============ Styles ============ */
+/* fields: font anton|mont|serif|script|poppins, caseMode upper|lower|asis, hlMode box|gradbox|bar|color|none, grad=[c1,c2] big words ke liye, kwColor hlMode color ke liye, stroke, glow */
+const STYLES=[
+ {id:'reference', name:'⭐ Reference Style', desc:'Cream text, maroon/cream highlight box — the original Digii Bro look', main:'#fff6e9', small:'#fff6e9', hlBg:'#fff6e9', hlTx:'#111111', accBg:'#8a0e1f', accTx:'#fff6e9', font:'anton', caseMode:'upper', hlMode:'box', sampleSmall:'phone se laptop par', sampleBig:'PHOTO', sampleKw:'VIDEO'},
+ {id:'premium', name:'Premium Blue', desc:'Blue gradient HUGE word — the "Want this PREMIUM fonts" style', main:'#ffffff', small:'#ffffff', hlBg:'#0072ff', hlTx:'#ffffff', accBg:'#0072ff', accTx:'#ffffff', font:'anton', caseMode:'upper', hlMode:'gradbox', grad:['#5ec2ff','#0057ff'], gradBox:['#38b6ff','#0057ff'], glow:'#2f7bff', sampleSmall:'want this', sampleBig:'PREMIUM', sampleKw:'FONTS'},
+ {id:'perfect', name:'Perfect Purple', desc:'Italic mix + purple-pink highlight — the "not by waiting for the perfect day" style', main:'#ffffff', small:'#ffffff', hlBg:'#c026d3', hlTx:'#ffffff', accBg:'#7c3aed', accTx:'#ffffff', font:'mont', caseMode:'asis', hlMode:'gradbox', gradBox:['#e879f9','#7c3aed'], italic:true, fontSmall:'script', glow:'#d946ef', sampleSmall:'not by waiting for the', sampleBig:'perfect', sampleKw:'day'},
+ {id:'serif', name:'Elegant Serif', desc:'Classy serif italic — the "best performing viral videos" podcast style', main:'#ffffff', small:'#ffffff', hlBg:'#f5d67b', hlTx:'#111111', accBg:'#f5d67b', accTx:'#111111', font:'serif', caseMode:'asis', hlMode:'color', kwColor:'#f5d67b', italic:true, sampleSmall:'but my best performing', sampleBig:'viral', sampleKw:'videos'},
+ {id:'redbar', name:'Red Bar Bold', desc:'HUGE white text on a red bar — the "growing &" style', main:'#ffffff', small:'#ffffff', hlBg:'#e10600', hlTx:'#ffffff', accBg:'#e10600', accTx:'#ffffff', font:'anton', caseMode:'upper', hlMode:'bar', stroke:{c:'#000000',w:0.045}, sampleSmall:'so as we are', sampleBig:'GROWING', sampleKw:'&'},
+ {id:'cyan', name:'Cyan Pop', desc:'Big cyan bold word — the "paying for it" style', main:'#ffffff', small:'#ffffff', hlBg:'#00b7eb', hlTx:'#ffffff', accBg:'#00b7eb', accTx:'#ffffff', font:'mont', caseMode:'asis', hlMode:'color', kwColor:'#1ec8f5', sampleSmall:"you shouldn't be", sampleBig:'paying', sampleKw:'for it'},
+ {id:'clean', name:'Clean Space', desc:'Clean lowercase bold, no box — the "giving space to each other" modern style', main:'#ffffff', small:'#f2f2f2', hlBg:'#ffffff', hlTx:'#111111', accBg:'#ffffff', accTx:'#111111', font:'poppins', caseMode:'lower', hlMode:'none', sampleSmall:'giving', sampleBig:'space', sampleKw:'to each other'},
+ {id:'hormozi', name:'Hormozi Yellow', desc:'White text, yellow highlight — business/reels style', main:'#ffffff', small:'#ffffff', hlBg:'#ffd400', hlTx:'#000000', accBg:'#ffd400', accTx:'#000000', font:'anton', caseMode:'upper', hlMode:'box', sampleSmall:'paise kaise', sampleBig:'KAMAYEIN', sampleKw:'?'},
+ {id:'mrbeast', name:'MrBeast Bold', desc:'Yellow/white huge text, thick black outline — the most viral style', main:'#ffffff', small:'#ffe600', hlBg:'#ffe600', hlTx:'#000000', accBg:'#ffe600', accTx:'#000000', font:'anton', caseMode:'upper', hlMode:'box', stroke:{c:'#000000',w:0.14}, sampleSmall:'maine banaya', sampleBig:'SAB SE', sampleKw:'BARA'},
+ {id:'neon', name:'Neon Pop', desc:'Cyan + pink highlight, glow — Gen-Z energy', main:'#ffffff', small:'#eaffff', hlBg:'#00e5ff', hlTx:'#00181c', accBg:'#ff2e9a', accTx:'#ffffff', font:'anton', caseMode:'upper', hlMode:'box', glow:'#00e5ff', sampleSmall:'ye hai', sampleBig:'NEON', sampleKw:'STYLE'},
+ {id:'sunset', name:'Sunset Gradient', desc:'Orange-pink gradient huge words — aesthetic reels', main:'#ffffff', small:'#ffffff', hlBg:'#ffffff', hlTx:'#e8325f', accBg:'#ffffff', accTx:'#e8325f', font:'anton', caseMode:'upper', hlMode:'box', grad:['#ffb03a','#ff2e63'], sampleSmall:'golden hour', sampleBig:'SUNSET', sampleKw:'VIBES'},
+ {id:'beast', name:'Beast Red', desc:'White text, red highlight box', main:'#ffffff', small:'#ffffff', hlBg:'#e10600', hlTx:'#ffffff', accBg:'#ffffff', accTx:'#e10600', font:'anton', caseMode:'upper', hlMode:'box', sampleSmall:'rukna', sampleBig:' mana', sampleKw:'HAI'},
+ {id:'karaoke', name:'Karaoke Gold', desc:'Keyword in golden color — song/podcast karaoke feel', main:'#ffffff', small:'#ffffff', hlBg:'#ffd400', hlTx:'#111111', accBg:'#ffd400', accTx:'#111111', font:'mont', caseMode:'upper', hlMode:'color', kwColor:'#ffd400', sampleSmall:'har lafz', sampleBig:'SUNEHRA', sampleKw:'HO'},
+ {id:'mono', name:'Mono Bold', desc:'Clean white/black, no colors', main:'#ffffff', small:'#ffffff', hlBg:'#ffffff', hlTx:'#000000', accBg:'#ffffff', accTx:'#000000', font:'anton', caseMode:'upper', hlMode:'box', sampleSmall:'bilkul', sampleBig:'SAAF', sampleKw:'TEXT'},
+ {id:'hormozi2', name:'🆕 Hormozi Box 2.0', desc:'Rotating color box jumps word to word — the 2026 Hormozi look', main:'#ffffff', small:'#ffffff', hlBg:'#ffd93d', hlTx:'#111111', accBg:'#39ff14', accTx:'#111111', font:'anton', caseMode:'upper', hlMode:'box', accRotate:['#ffd93d','#39ff14','#00cfff','#ff5e3a'], sampleSmall:'paise kamana', sampleBig:'ASAN', sampleKw:'HAI'},
+ {id:'gadzhi', name:'🆕 Gadzhi Gold Serif', desc:'Cream serif, gold keyword — Iman Gadzhi premium style', main:'#fdfbf7', small:'#fdfbf7', hlBg:'#d4af37', hlTx:'#111111', accBg:'#d4af37', accTx:'#111111', font:'serif', caseMode:'asis', hlMode:'color', kwColor:'#d4af37', sampleSmall:'how to grow', sampleBig:'your channel', sampleKw:'fast'},
+ {id:'karaokesweep', name:'🆕 Karaoke Sweep', desc:'Words fill with gold as spoken — karaoke podcast style', main:'#ffffff', small:'#ffffff', hlBg:'#ffd700', hlTx:'#111111', accBg:'#ffd700', accTx:'#111111', font:'mont', caseMode:'upper', hlMode:'color', kwColor:'#ffd700', karaoke:true, stroke:{c:'#000000',w:0.09}, sampleSmall:'har word', sampleBig:'RANG BHARTA', sampleKw:'JATA'},
+ {id:'vox', name:'🆕 Vox Highlighter', desc:'Yellow marker sweeps behind the spoken word — Vox explainer style', main:'#ffffff', small:'#ffffff', hlBg:'#ffe619', hlTx:'#111111', accBg:'#ffe619', accTx:'#111111', font:'mont', caseMode:'asis', hlMode:'color', kwColor:'#ffffff', marker:true, sampleSmall:'the real', sampleBig:'reason', sampleKw:'why'},
+ {id:'beastpop', name:'🆕 Beast Pop', desc:'Tilted springy pop, rotating neon palette — MrBeast energy', main:'#ffffff', small:'#ffffff', hlBg:'#00ffff', hlTx:'#111111', accBg:'#00ff00', accTx:'#111111', font:'anton', caseMode:'upper', hlMode:'box', tilt:-0.045, accRotate:['#00ffff','#00ff00','#ffd400','#ff5ea8'], stroke:{c:'#000000',w:0.10}, sampleSmall:'maine banaya', sampleBig:'SAB SE', sampleKw:'VIRAL'},
+ {id:'podlime', name:'🆕 Podcast Lime', desc:'White caps, electric lime keyword — podcast clips look', main:'#ffffff', small:'#ffffff', hlBg:'#a3e635', hlTx:'#111111', accBg:'#a3e635', accTx:'#111111', font:'mont', caseMode:'upper', hlMode:'color', kwColor:'#a3e635', sampleSmall:'podcast', sampleBig:'CLIPS', sampleKw:'VIRAL'},
+ {id:'editorial', name:'🆕 Editorial Red', desc:'Cream serif with a deep-red keyword — the typography-reel poster look', main:'#fdf6e0', small:'#fdf6e0', hlBg:'#a31621', hlTx:'#fdf6e0', accBg:'#a31621', accTx:'#fdf6e0', font:'serif', caseMode:'asis', hlMode:'color', kwColor:'#ff4d5e', italic:true, sampleSmall:'agar tum bhi chahte ho', sampleBig:'premium', sampleKw:'EDITING'},
+ {id:'kinetype', name:'🆕 Kinetic Mix', desc:'Black box + yellow keyword, punchy mixed case — kinetic typography reels', main:'#ffffff', small:'#ffffff', hlBg:'#111111', hlTx:'#ffd400', accBg:'#ffd400', accTx:'#111111', font:'anton', caseMode:'asis', hlMode:'box', sampleSmall:'ye hai', sampleBig:'KINETIC', sampleKw:'type'},
+ {id:'royal', name:'🆕 Royal Emerald', desc:'Emerald + gold serif — premium, calm and classy', main:'#ffffff', small:'#ffffff', hlBg:'#0f766e', hlTx:'#ffffff', accBg:'#0f766e', accTx:'#ffffff', font:'serif', caseMode:'asis', hlMode:'color', kwColor:'#d4af37', italic:true, sampleSmall:'sapne wahi', sampleBig:'pure hote', sampleKw:'HAI'},
+ {id:'candy', name:'🆕 Candy Pop', desc:'Pink-purple gradient box, soft rounded pop — fun creator energy', main:'#ffffff', small:'#ffffff', hlBg:'#ec4899', hlTx:'#ffffff', accBg:'#a855f7', accTx:'#ffffff', font:'poppins', caseMode:'lower', hlMode:'gradbox', gradBox:['#f472b6','#a855f7'], glow:'#f472b6', sampleSmall:'ye wala', sampleBig:'candy', sampleKw:'style'},
+ {id:'mint', name:'🆕 Mint Fresh', desc:'Clean caps with a mint highlight box — fresh tech look', main:'#ffffff', small:'#ffffff', hlBg:'#6ee7b7', hlTx:'#052e22', accBg:'#6ee7b7', accTx:'#052e22', font:'mont', caseMode:'upper', hlMode:'box', sampleSmall:'bilkul', sampleBig:'FRESH', sampleKw:'LOOK'},
+ {id:'peach', name:'🆕 Peach Sorbet', desc:'Warm peach-to-coral gradient words — aesthetic lifestyle reels', main:'#ffffff', small:'#ffffff', hlBg:'#ffffff', hlTx:'#e14b32', accBg:'#ffffff', accTx:'#e14b32', font:'anton', caseMode:'upper', hlMode:'box', grad:['#ffd9a0','#ff7e5f'], sampleSmall:'soft si', sampleBig:'PEACH', sampleKw:'GLOW'},
+ {id:'violet', name:'🆕 Violet Storm', desc:'Tilted violet pop with rotating accents and glow — high energy', main:'#ffffff', small:'#ffffff', hlBg:'#7c3aed', hlTx:'#ffffff', accBg:'#06b6d4', accTx:'#111111', font:'anton', caseMode:'upper', hlMode:'box', tilt:0.04, glow:'#8b5cf6', accRotate:['#7c3aed','#06b6d4','#ec4899'], stroke:{c:'#000000',w:0.08}, sampleSmall:'ye hai', sampleBig:'VIOLET', sampleKw:'STORM'},
+ {id:'ivory', name:'🆕 Ivory Minimal', desc:'Warm ivory serif, one burnt-orange keyword — minimal editorial', main:'#f7f3ea', small:'#f7f3ea', hlBg:'#e4572e', hlTx:'#f7f3ea', accBg:'#e4572e', accTx:'#f7f3ea', font:'serif', caseMode:'asis', hlMode:'color', kwColor:'#e4572e', sampleSmall:'kam alfaaz', sampleBig:'zyada', sampleKw:'asar'},
+];
+let curStyle=STYLES[0];
+const FONT_CSS={anton:"Anton, Impact, sans-serif", mont:"Montserrat, sans-serif", serif:"'Playfair Display', Georgia, serif", script:"Caveat, cursive", poppins:"Poppins, sans-serif"};
+function pvText(txt, st, opts){
+  const s=document.createElement('span'); s.textContent=txt;
+  s.style.fontFamily=FONT_CSS[opts.font||st.font]; if(opts.italic||st.italic) s.style.fontStyle='italic';
+  if(opts.grad){ s.style.background='linear-gradient(180deg,'+opts.grad[0]+','+opts.grad[1]+')'; s.style.webkitBackgroundClip='text'; s.style.backgroundClip='text'; s.style.color='transparent'; }
+  else s.style.color=opts.color||'#fff';
+  if(opts.stroke) s.style.webkitTextStroke='1.2px #000';
+  if(opts.bg){ s.style.background=opts.bg; s.style.color=opts.color; s.style.padding='0 5px'; }
+  if(opts.gradBg){ s.style.background='linear-gradient(90deg,'+opts.gradBg[0]+','+opts.gradBg[1]+')'; s.style.color=opts.color; s.style.padding='0 5px'; }
+  return s;
+}
+const styleBox=$('styles');
+STYLES.forEach((st,idx)=>{
+  const b=document.createElement('button'); b.className='stylecard'+(idx===0?' sel':''); b.type='button';
+  const pv=document.createElement('div'); pv.className='pv';
+  const sm=document.createElement('div'); sm.className='pvsmall';
+  sm.appendChild(pvText(st.sampleSmall, st, {font:st.fontSmall||'mont', color:st.small}));
+  const big=document.createElement('div'); big.className='pvbig';
+  if(st.hlMode==='bar'){ const bw=pvText(st.sampleBig+' '+(st.sampleKw||''), st, {}); bw.style.background=st.hlBg; bw.style.padding='1px 7px'; big.appendChild(bw); }
+  else{
+    big.appendChild(pvText(st.sampleBig, st, {grad:st.grad, stroke:st.stroke, color:st.main}));
+    big.appendChild(document.createTextNode(' '));
+    if(st.hlMode==='box') big.appendChild(pvText(st.sampleKw, st, {bg:st.hlBg, color:st.hlTx}));
+    else if(st.hlMode==='gradbox') big.appendChild(pvText(st.sampleKw, st, {gradBg:st.gradBox||[st.hlBg,st.hlBg], color:st.hlTx}));
+    else if(st.hlMode==='color') big.appendChild(pvText(st.sampleKw, st, {color:st.kwColor||st.hlBg, grad:st.grad}));
+    else big.appendChild(pvText(st.sampleKw, st, {color:st.main}));
+  }
+  pv.appendChild(sm); pv.appendChild(big);
+  const nm=document.createElement('div'); nm.className='sname'; nm.textContent=st.name;
+  const ds=document.createElement('small'); ds.textContent=st.desc;
+  b.appendChild(pv); b.appendChild(nm); b.appendChild(ds);
+  b.onclick=()=>{curStyle=st; document.querySelectorAll('.stylecard').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); drawFrame(currentTime());};
+  styleBox.appendChild(b);
+});
+
+/* ============ State ============ */
+let audioFile=null, audioURL=null, audioDur=0, audioBuffer=null;
+let wordTimes=null;            // [{w,start,end}] from whisper
+let chunks=[];                 // [{words:[{w,forced}], start,end, keywordIdx}]
+let playing=false, rafId=null, startedAt=0, startOffset=0, exportMode=false;
+
+const player=$('player');
+player.addEventListener('loadedmetadata',()=>{ audioDur=player.duration||0; $('clock').textContent='0.0s / '+audioDur.toFixed(1)+'s'; });
+player.addEventListener('ended',()=>{ stopPreview(); });
+
+/* ============ File loading ============ */
+const drop=$('drop'), fileIn=$('file');
+drop.onclick=()=>fileIn.click();
+drop.ondragover=e=>{e.preventDefault(); drop.classList.add('over');};
+drop.ondragleave=()=>drop.classList.remove('over');
+drop.ondrop=e=>{e.preventDefault(); drop.classList.remove('over'); if(e.dataTransfer.files[0]) loadAudio(e.dataTransfer.files[0]);};
+fileIn.onchange=()=>{ if(fileIn.files[0]) loadAudio(fileIn.files[0]); };
+async function loadAudio(f){
+  audioFile=f; if(audioURL) URL.revokeObjectURL(audioURL);
+  audioURL=URL.createObjectURL(f); player.src=audioURL;
+  $('fileinfo').innerHTML='<span class="chip">'+f.name+'</span><span class="chip">'+(f.size/1048576).toFixed(1)+' MB</span>';
+  try{ const ab=await f.arrayBuffer(); const ctx=new (window.AudioContext||window.webkitAudioContext)(); audioBuffer=await ctx.decodeAudioData(ab); audioDur=audioBuffer.duration; ctx.close(); }
+  catch(e){ audioBuffer=null; }
+  $('sstatus').textContent='Audio loaded ('+audioDur.toFixed(1)+'s). Now transcribe in Step 2, or paste a transcript and press Sync.';
+}
+
+/* ============ SRT import (sab se fast, perfect timing) ============ */
+let srtCues=null;
+function srtToSec(h,m,s,ms){ return (+h)*3600+(+m)*60+(+s)+(+ms)/1000; }
+function parseSRT(text){
+  const cues=[]; const blocks=text.replace(/\r\n/g,'\n').split(/\n\s*\n/);
+  const re=/(\d{1,2}):(\d{2}):(\d{2})[,.](\d{1,3})\s*-->\s*(\d{1,2}):(\d{2}):(\d{2})[,.](\d{1,3})/;
+  blocks.forEach(bl=>{
+    const lines=bl.split('\n').map(x=>x.trim()).filter(Boolean);
+    const ti=lines.findIndex(l=>re.test(l)); if(ti<0) return;
+    const mm=lines[ti].match(re);
+    const txt=lines.slice(ti+1).join(' ').replace(/<[^>]+>/g,'').replace(/\{[^}]+\}/g,'').trim();
+    if(!txt) return;
+    cues.push({ start:srtToSec(mm[1],mm[2],mm[3],mm[4]), end:srtToSec(mm[5],mm[6],mm[7],mm[8]), text:txt });
+  });
+  return cues;
+}
+$('srtbtn').onclick=()=>$('srtfile').click();
+$('srtfile').onchange=async()=>{
+  const f=$('srtfile').files[0]; if(!f) return;
+  try{
+    const text=await f.text(); const cues=parseSRT(text);
+    if(!cues.length){ $('srtstatus').className='status err'; $('srtstatus').textContent='⚠️ No SRT cues found in this file. Please give a proper .srt file (like ElevenLabs exports).'; return; }
+    srtCues=cues;
+    // word timings: har cue ke andar words ko cue ki duration mein baanto — timing milli-second perfect
+    wordTimes=[];
+    cues.forEach(c=>{
+      const ws=toHinglish(c.text).split(/\s+/).filter(Boolean);
+      const wts=ws.map(w=>Math.max(2,w.replace(/[^a-zA-Z0-9]/g,'').length)); const tot=wts.reduce((a,b)=>a+b,0)||1;
+      let t=c.start;
+      ws.forEach((w,i)=>{ const d=(c.end-c.start)*(wts[i]/tot); wordTimes.push({w, start:t, end:t+d}); t+=d; });
+    });
+    $('transcript').value=cues.map(c=>toHinglish(c.text)).join(' ');
+    const lastEnd=cues[cues.length-1].end;
+    if(lastEnd>audioDur) audioDur=lastEnd;
+    $('srtstatus').className='status';
+    $('srtstatus').textContent='✅ SRT loaded: '+cues.length+' captions, total '+lastEnd.toFixed(1)+'s. Timing is set perfectly — all transcription time saved! Now pick a style and Play/Export.';
+    buildChunks();
+  }catch(err){ $('srtstatus').className='status err'; $('srtstatus').textContent='⚠️ Problem reading the SRT: '+(err.message||err); }
+};
+
+/* ============ Transcription (Whisper in browser, free) ============ */
+let transcriber=null;
+async function ensureModel(statusEl, progEl){
+  statusEl.textContent='Loading the Whisper library...';
+  const { pipeline, env } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2/dist/transformers.min.js');
+  env.allowLocalModels=false;
+  const model=$('model').value;
+  if(!transcriber || transcriber._model!==model){
+    statusEl.textContent='Downloading the model (first time only)...';
+    transcriber=await pipeline('automatic-speech-recognition', model, { quantized:true,
+      progress_callback:p=>{ if(p.status==='progress'&&p.progress!==undefined){ if(progEl)progEl.value=p.progress; statusEl.textContent='Model download: '+Math.round(p.progress)+'% ('+(p.file||'')+')'; } }});
+    transcriber._model=model;
+  }
+}
+async function audioData16k(){
+  const abuf=audioBuffer || await (async()=>{ const ab=await audioFile.arrayBuffer(); const ctx=new AudioContext({sampleRate:16000}); const d=await ctx.decodeAudioData(ab); ctx.close(); return d; })();
+  if(abuf.sampleRate===16000 && abuf.numberOfChannels===1) return abuf.getChannelData(0);
+  const len=Math.floor(abuf.duration*16000); const data=new Float32Array(len);
+  const ch0=abuf.getChannelData(0), ch1=abuf.numberOfChannels>1?abuf.getChannelData(1):ch0;
+  const ratio=abuf.sampleRate/16000;
+  for(let i=0;i<len;i++){ const s=Math.floor(i*ratio); data[i]=(ch0[s]+ch1[s])/2; }
+  return data;
+}
+/* ============ AI Worker: saari AI (Whisper + Planner) background mein chalti hai,
+   taake tool ki screen KABHI freeze na ho ============ */
+const AI_WORKER_CODE=`
+import { pipeline, env } from 'https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2/dist/transformers.min.js';
+env.allowLocalModels=false;
+try{ env.backends.onnx.wasm.numThreads=1; }catch(e){}
+let asr=null, asrModel=null, emb=null;
+self.onmessage=async(e)=>{
+  const m=e.data, id=m._id;
+  const prog=p=>{ if(p.status==='progress'&&p.progress!==undefined) self.postMessage({_id:id, t:'progress', v:p.progress, file:p.file||''}); };
+  try{
+    if(m.cmd==='transcribe'){
+      if(!asr||asrModel!==m.model){ self.postMessage({_id:id, t:'status', msg:'Downloading the AI model (first time only)...'}); asr=await pipeline('automatic-speech-recognition', m.model, { quantized:true, progress_callback:prog }); asrModel=m.model; }
+      self.postMessage({_id:id, t:'status', msg:'AI is listening to your audio and extracting word timings...'});
+      const opts={ return_timestamps:'word', chunk_length_s:30, stride_length_s:5, task:'transcribe' };
+      if(m.lang) opts.language=m.lang;
+      const res=await asr(m.audio, opts);
+      self.postMessage({_id:id, t:'result', res});
+    }else if(m.cmd==='classify'){
+      if(!emb){ self.postMessage({_id:id, t:'status', msg:'Loading the AI Planner model (one-time, ~25 MB)...'}); emb=await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2', { quantized:true, progress_callback:prog }); }
+      self.postMessage({_id:id, t:'status', msg:'AI is reading your script and deciding where images, recordings and elements belong...'});
+      const labels=m.labels, texts=labels.map(l=>l.text).concat(m.scenes);
+      const out=await emb(texts, { pooling:'mean', normalize:true });
+      const dim=out.dims[1], data=out.data;
+      const sim=(a,b)=>{ let sm=0; for(let k=0;k<dim;k++) sm+=data[a*dim+k]*data[b*dim+k]; return sm; };
+      const res=m.scenes.map((txt,si)=>{ const o={}; labels.forEach((l,li)=>{ o[l.key]=sim(labels.length+si, li); }); return o; });
+      self.postMessage({_id:id, t:'result', res});
+    }
+  }catch(err){ self.postMessage({_id:id, t:'error', msg:String((err&&err.message)||err)}); }
+};`;
+let aiWorker=null, aiSeq=0, aiAlive=false; const aiPending=new Map();
+function aiCall(msg, onProgress){
+  return new Promise((resolve,reject)=>{
+    try{
+      if(!aiWorker){
+        aiWorker=new Worker(URL.createObjectURL(new Blob([AI_WORKER_CODE],{type:'text/javascript'})), {type:'module'});
+        aiWorker.onmessage=e=>{ aiAlive=true; const d=e.data, en=aiPending.get(d._id); if(!en) return;
+          if(d.t==='progress'||d.t==='status'){ if(en.onProgress) en.onProgress(d); }
+          else if(d.t==='result'){ aiPending.delete(d._id); en.resolve(d.res); }
+          else if(d.t==='error'){ aiPending.delete(d._id); en.reject(new Error(d.msg)); } };
+        aiWorker.onerror=()=>{ aiPending.forEach(en=>en.reject(new Error('AI background worker failed to start'))); aiPending.clear(); try{ aiWorker.terminate(); }catch(e){} aiWorker=null; };
+      }
+      const id=++aiSeq; aiPending.set(id,{resolve,reject,onProgress});
+      if(!aiAlive){ setTimeout(()=>{ if(!aiAlive && aiPending.has(id)){ aiPending.delete(id); try{ aiWorker.terminate(); }catch(e){} aiWorker=null; reject(new Error('AI background worker did not start in time')); } }, 25000); }
+      aiWorker.postMessage(Object.assign({}, msg, {_id:id}), msg.audio? [msg.audio.buffer] : []);
+    }catch(err){ reject(err); }
+  });
+}
+function whisperResult(res){
+  const raw=(res.text||'').trim();
+  const pieces=res.chunks&&res.chunks.length?res.chunks:[];
+  const words=pieces.map(c=>({ w:toHinglish(c.text||'').trim(), start:c.timestamp?c.timestamp[0]||0:0, end:c.timestamp?(c.timestamp[1]??c.timestamp[0]+0.35):0.35 })).filter(x=>x.w);
+  return { raw, words };
+}
+async function runWhisper(statusEl, progEl){
+  const data=await audioData16k();
+  const model=$('model').value, lang=$('lang').value;
+  let lastMsg='Preparing the AI...', sec=0;
+  const iv=setInterval(()=>{ sec++; statusEl.textContent=lastMsg+'  ⏱ '+sec+'s — the tool stays fully usable, nothing is frozen.'; }, 1000);
+  try{
+    const res=await aiCall({cmd:'transcribe', audio:data, model, lang}, d=>{
+      if(d.t==='progress'){ if(progEl) progEl.value=d.v; lastMsg='Model download: '+Math.round(d.v)+'% ('+(d.file||'')+')'; }
+      else if(d.t==='status'){ lastMsg=d.msg; }
+      statusEl.textContent=lastMsg;
+    });
+    clearInterval(iv);
+    return whisperResult(res);
+  }catch(err){
+    clearInterval(iv);
+    console.warn('AI worker unavailable, falling back to direct mode:', err);
+    statusEl.textContent='Background AI mode unavailable in this browser — processing directly (the screen may pause briefly)...';
+    await new Promise(r=>setTimeout(r,80));
+    await ensureModel(statusEl, progEl);
+    statusEl.textContent='Listening to the audio — extracting word-by-word timings...';
+    const opts={ return_timestamps:'word', chunk_length_s:30, stride_length_s:5, task:'transcribe' };
+    if(lang) opts.language=lang;
+    const res=await transcriber(data, opts);
+    return whisperResult(res);
+  }
+}
+$('transcribe').onclick=async()=>{
+  if(!audioFile){ $('tstatus').textContent='Please upload audio in Step 1 first.'; $('tstatus').className='status err'; return; }
+  const btn=$('transcribe'); btn.disabled=true; $('tprog').style.display='block'; $('tstatus').className='status';
+  try{
+    const { raw, words }=await runWhisper($('tstatus'), $('tprog'));
+    if(!raw) throw new Error('Whisper could not hear anything. Is the audio clear? Try again, or paste the transcript yourself.');
+    wordTimes=words.length?words:null;
+    $('transcript').value=toHinglish(raw);
+    $('tstatus').textContent='✅ Transcription done'+(wordTimes?' (with word timings)':'')+'. Fix any mistakes in the text above, then press Sync in Step 3.';
+    buildChunks();
+  }catch(err){
+    console.error(err);
+    $('tstatus').className='status err';
+    $('tstatus').textContent='⚠️ Transcription failed: '+(err.message||err)+'\nNo problem — paste the transcript yourself and press Sync in Step 3, captions will still be created.';
+  }finally{ btn.disabled=false; $('tprog').style.display='none'; }
+};
+
+/* ============ Voice Sync: forced alignment (user text -> asal audio timings) ============ */
+function normWord(w){ return w.toLowerCase().replace(/[^a-z0-9ऀ-ॿ]/g,''); }
+function lev(a,b){
+  if(a===b) return 0; const m=a.length,n=b.length; if(!m) return n; if(!n) return m;
+  let prev=Array.from({length:n+1},(_,j)=>j);
+  for(let i=1;i<=m;i++){ const cur=[i]; for(let j=1;j<=n;j++){ cur[j]=Math.min(prev[j]+1, cur[j-1]+1, prev[j-1]+(a[i-1]===b[j-1]?0:1)); } prev=cur; }
+  return prev[n];
+}
+function alignUserWords(userWords, whisperWords){
+  // Dynamic-programming sequence alignment: user ke har word ko whisper ki asal timing par bithata hai
+  const U=userWords.map(normWord), W=whisperWords.map(x=>normWord(x.w));
+  const n=U.length, m=W.length;
+  if(!n||!m) return null;
+  const cost=[], dir=[];
+  for(let i=0;i<=n;i++){ cost.push(new Float32Array(m+1)); dir.push(new Uint8Array(m+1)); cost[i][0]=i; dir[i][0]=1; }
+  for(let j=0;j<=m;j++){ cost[0][j]=j; dir[0][j]=2; }
+  const GAP=1.0;
+  for(let i=1;i<=n;i++){
+    for(let j=1;j<=m;j++){
+      const a=U[i-1], b=W[j-1];
+      let sub;
+      if(a===b) sub=0; else { const d=lev(a,b); sub= d<=Math.max(1,Math.floor(Math.max(a.length,b.length)*0.34))? 0.45 : 1.0; }
+      const diag=cost[i-1][j-1]+sub, up=cost[i-1][j]+GAP, left=cost[i][j-1]+GAP;
+      if(diag<=up && diag<=left){ cost[i][j]=diag; dir[i][j]=0; }
+      else if(up<=left){ cost[i][j]=up; dir[i][j]=1; }
+      else { cost[i][j]=left; dir[i][j]=2; }
+    }
+  }
+  const match=new Array(n).fill(-1); let i=n,j=m, exact=0;
+  while(i>0||j>0){
+    if(i>0&&j>0&&dir[i][j]===0){ match[i-1]=j-1; if(U[i-1]===W[j-1]) exact++; i--; j--; }
+    else if(i>0&&(j===0||dir[i][j]===1)){ i--; }
+    else if(j>0){ j--; }
+    else break;
+  }
+  // timings assign karo; unmatched user words ko neighbours ke beech interpolate karo
+  const out=new Array(n).fill(null);
+  match.forEach((wj,k)=>{ if(wj>=0){ const s=whisperWords[wj]; out[k]={ w:userWords[k], start:s.start, end:Math.max(s.end, s.start+0.15) }; } });
+  let k=0;
+  while(k<n){
+    if(out[k]){ k++; continue; }
+    let e=k; while(e<n&&!out[e]) e++;
+    const prevT= k>0? out[k-1].end : 0;
+    const nextT= e<n? out[e].start : Math.max(prevT+(e-k)*0.32, audioDur||prevT+(e-k)*0.32);
+    const span=Math.max(nextT-prevT, (e-k)*0.18);
+    for(let q=k;q<e;q++){ const s=prevT+span*(q-k)/(e-k); out[q]={ w:userWords[q], start:s, end:s+span/(e-k)*0.9 }; }
+    k=e;
+  }
+  return { times:out, score: Math.round(100*exact/Math.max(n,m)) };
+}
+$('voicesync').onclick=async()=>{
+  if(!audioFile){ $('vstatus').textContent='Please upload the voiceover audio in Step 1 first.'; $('vstatus').className='status err'; return; }
+  const txt=$('transcript').value.trim();
+  if(!txt){ $('vstatus').textContent='A transcript is needed first — give an SRT, transcribe, or paste the text yourself. Voice Sync will align that text onto the audio.'; $('vstatus').className='status err'; return; }
+  const btn=$('voicesync'); btn.disabled=true; $('vprog').style.display='block'; $('vstatus').className='status';
+  try{
+    const { words }=await runWhisper($('vstatus'), $('vprog'));
+    if(!words.length) throw new Error('Whisper could not get word timings. Choose the Better/Best model and try again.');
+    const userWords=txt.split(/\s+/).filter(Boolean).map(t=>t.replace(/\*\*/g,''));
+    const al=alignUserWords(userWords, words);
+    if(!al) throw new Error('Alignment could not be done.');
+    wordTimes=al.times;
+    buildChunks();
+    $('vstatus').textContent='✅ Voice Sync done! '+userWords.length+' words aligned to the real audio timing (match quality ~'+al.score+'%). Now whichever word is spoken at a moment will appear in the caption at that exact moment. Check the preview.';
+  }catch(err){
+    console.error(err);
+    $('vstatus').className='status err';
+    $('vstatus').textContent='⚠️ Voice Sync failed: '+(err.message||err);
+  }finally{ btn.disabled=false; $('vprog').style.display='none'; }
+};
+/* offset: saari timings ko barabar aage/peeche karna */
+let syncOffset=0;
+function applyOffsetUI(){ $('offval').textContent='Offset: '+(syncOffset>=0?'+':'')+syncOffset.toFixed(2)+'s'; $('offset').value=Math.round(syncOffset*100); }
+$('offset').addEventListener('input',()=>{ syncOffset=parseInt($('offset').value,10)/100; applyOffsetUI(); if(wordTimes||chunks.length) buildChunks(); });
+$('nudgeback').onclick=()=>{ syncOffset=Math.max(-2,syncOffset-0.1); applyOffsetUI(); if(wordTimes||chunks.length) buildChunks(); };
+$('nudgefwd').onclick=()=>{ syncOffset=Math.min(2,syncOffset+0.1); applyOffsetUI(); if(wordTimes||chunks.length) buildChunks(); };
+/* snap: har word ki start ko qareebi speech-onset (pause ke baad awaz ki shuruaat) par le jao */
+$('snap').onclick=()=>{
+  if(!audioBuffer){ $('vstatus').textContent='For Snap, upload the audio first (audio analysis is needed).'; $('vstatus').className='status err'; return; }
+  if(!wordTimes){ $('vstatus').textContent='Create timings first (SRT / Transcribe / Voice Sync), then snap.'; $('vstatus').className='status err'; return; }
+  const segs=speechSegments(audioBuffer); if(!segs){ $('vstatus').textContent='No pauses found in the audio.'; $('vstatus').className='status err'; return; }
+  let snapped=0;
+  wordTimes.forEach(w=>{
+    let best=null,bd=1e9;
+    segs.forEach(s=>{ const d=Math.abs(s.start-w.start); if(d<bd){bd=d;best=s.start;} });
+    if(best!==null&&bd<=0.3){ if(Math.abs(best-w.start)>0.02) snapped++; w.start=best; if(w.end<w.start+0.12) w.end=w.start+0.12; }
+  });
+  buildChunks();
+  $('vstatus').className='status';
+  $('vstatus').textContent='✅ '+snapped+' words snapped to voice pauses. Sync should be tighter now — check the preview.';
+};
+$('tohinglish').onclick=()=>{ $('transcript').value=toHinglish($('transcript').value); };
+$('demo').onclick=()=>{
+  wordTimes=null; srtCues=null;
+  $('transcript').value='Abhi bhi phone se laptop par photo ya video khud ko WhatsApp karte ho? To aaj hai day 6 of AI for college students. Dono mein Pairdrop kholo, na cable, na account banane ka jhanjhat, na app install karne ki zaroorat!';
+  if(!audioDur) audioDur=18;
+  buildChunks();
+  $('sstatus').textContent='Demo text filled. Press Play Preview — the animation will look the same on your voiceover too.';
+};
+
+/* ============ Timing + chunk building ============ */
+function speechSegments(buf){
+  // energy-based: returns [{start,end}] of speech (pauses removed) for smarter sync
+  if(!buf) return null;
+  const d=buf.getChannelData(0), sr=buf.sampleRate, win=Math.floor(sr*0.05);
+  const n=Math.floor(d.length/win); const rms=[];
+  let max=0;
+  for(let i=0;i<n;i++){ let s=0; for(let j=0;j<win;j+=7){ const v=d[i*win+j]; s+=v*v; } const r=Math.sqrt(s/(win/7)); rms.push(r); if(r>max)max=r; }
+  const th=max*0.10; const segs=[]; let cur=null;
+  rms.forEach((r,i)=>{ const t=i*0.05; if(r>th){ if(!cur)cur={start:t,end:t+0.05}; else cur.end=t+0.05; } else if(cur){ segs.push(cur); cur=null; } });
+  if(cur)segs.push(cur);
+  // merge tiny gaps < 0.28s
+  const merged=[]; segs.forEach(s=>{ const last=merged[merged.length-1]; if(last && s.start-last.end<0.28) last.end=s.end; else merged.push({...s}); });
+  return merged.length?merged:null;
+}
+function distributeWords(words, totalDur){
+  // returns wordTimes using speech segments + word-length weighting
+  const segs=speechSegments(audioBuffer);
+  const weights=words.map(w=>Math.max(2, w.replace(/[^a-zA-Z0-9]/g,'').length));
+  const totalW=weights.reduce((a,b)=>a+b,0);
+  const out=[]; let wi=0;
+  if(segs){
+    const speechTotal=segs.reduce((a,s)=>a+(s.end-s.start),0);
+    segs.forEach(seg=>{
+      const segDur=seg.end-seg.start;
+      let used=0; const segWords=[];
+      // estimate how many words belong to this segment by weight share
+      let target=segDur/speechTotal*totalW; let acc=0;
+      while(wi<words.length && (acc<target || segWords.length===0)){
+        segWords.push(wi); acc+=weights[wi]; wi++;
+        if(wi>=words.length) break;
+        if(acc>=target && wi<words.length) break;
+      }
+      let t=seg.start;
+      segWords.forEach(k=>{ const dur=segDur*(weights[k]/Math.max(acc,1)); out[k]={w:words[k],start:t,end:t+dur}; t+=dur; });
+      used=acc;
+    });
+    // any leftover words -> spread over last segment tail
+    while(wi<words.length){ const last=out[out.length-1]; const st=last?last.end:0; out[wi]={w:words[wi],start:st,end:Math.min(totalDur,st+0.35)}; wi++; }
+  }else{
+    let t=0; const gap=words.length? totalDur/ totalW : 0;
+    words.forEach((w,i)=>{ const dur=weights[i]*gap; out.push({w,start:t,end:t+dur}); t+=dur; });
+  }
+  return out;
+}
+function buildChunks(){
+  const raw=$('transcript').value.trim();
+  if(!raw){ $('sstatus').textContent='A transcript is needed first — transcribe or paste it yourself.'; $('sstatus').className='status err'; return; }
+  const perSel=$('perchunk').value;
+  const per= perSel==='auto'? 0 : parseInt(perSel,10);
+  // tokens with **forced** markers
+  const tokens=raw.split(/\s+/).filter(Boolean).map(tok=>{
+    const forced=/\*\*.+\*\*/.test(tok);
+    return { w:tok.replace(/\*\*/g,''), forced };
+  });
+  const words=tokens.map(t=>t.w);
+  if(!audioDur && player.duration) audioDur=player.duration;
+  const dur=audioDur||Math.max(4, words.length*0.38);
+  // timing: reuse whisper/SRT/voice-sync word times when counts match closely
+  let wt=null;
+  if(wordTimes && Math.abs(wordTimes.length-words.length)<=Math.max(2, words.length*0.15)){
+    wt=words.map((w,i)=>{ const src=wordTimes[Math.min(i,wordTimes.length-1)]; return {w, start:src.start, end:Math.max(src.end, src.start+0.18)}; });
+  }else{
+    wt=distributeWords(words, dur);
+  }
+  if(typeof syncOffset!=='undefined' && syncOffset){ wt=wt.map(x=>({ ...x, start:x.start+syncOffset, end:x.end+syncOffset })); }
+  // grouping: fixed number, ya Auto (phrase-based: SRT cue / jumla / comma par natural break)
+  const groups=[];
+  if(per>0){
+    for(let i=0;i<tokens.length;i+=per) groups.push([i, Math.min(i+per, tokens.length)]);
+  }else if(srtCues && wordTimes && Math.abs(wordTimes.length-words.length)<=Math.max(2, words.length*0.15)){
+    // SRT cues ko base rakho: bohat chhote cue agle ke saath mila do, bare cue ko aadha kar do
+    let wi=0;
+    const cueCounts=srtCues.map(c=>toHinglish(c.text).split(/\s+/).filter(Boolean).length);
+    let cur=null;
+    cueCounts.forEach(cnt=>{
+      const s=wi, e=Math.min(wi+cnt, tokens.length); wi=e;
+      if(e<=s) return;
+      if(cur && (e-cur[0])<=6 && (s-cur[0])<2){ cur[1]=e; }
+      else { if(cur)groups.push(cur); cur=[s,e]; }
+      while(cur[1]-cur[0]>6){ groups.push([cur[0], cur[0]+Math.ceil((cur[1]-cur[0])/2)]); cur[0]=groups[groups.length-1][1]; }
+    });
+    if(cur) groups.push(cur);
+    if(!groups.length) groups.push([0,tokens.length]);
+  }else{
+    let s=0;
+    for(let i=0;i<tokens.length;i++){
+      const cnt=i-s+1; const endsPhrase=/[.?!,;:]$/.test(tokens[i].w);
+      if((endsPhrase&&cnt>=2)||cnt>=5){ groups.push([s,i+1]); s=i+1; }
+    }
+    if(s<tokens.length) groups.push([s,tokens.length]);
+  }
+  chunks=[];
+  groups.forEach(([gi,gj])=>{
+    const i=gi;
+    const slice=tokens.slice(gi,gj).map((t,j)=>({ ...t, start:wt[gi+j].start, end:wt[gi+j].end }));
+    const start=wt[i].start, end=wt[Math.min(i+slice.length-1, wt.length-1)].end;
+    // keyword = forced word, else longest word, else number-containing word
+    let ki=slice.findIndex(t=>t.forced);
+    if(ki<0){ let best=-1; slice.forEach((t,idx)=>{ const score=t.w.replace(/[^a-zA-Z0-9]/g,'').length + (/\d/.test(t.w)?3:0); if(score>best){best=score;ki=idx;} }); }
+    // smart layout: zyada words hon to stack nahi (screen bhar jati hai), sirf group layouts
+    let layout=chunks.length%3;
+    if(slice.length>4) layout=chunks.length%2;
+    if(slice.length===1) layout=0;
+    chunks.push({ words:slice, start, end:Math.max(end,start+0.45), keywordIdx:ki, layout, idx:chunks.length });
+  });
+  $('sstatus').className='status';
+  $('sstatus').textContent='✅ '+chunks.length+' captions synced ('+dur.toFixed(1)+'s). Now watch Play Preview, then Export.';
+  drawFrame(0);
+}
+$('sync').onclick=buildChunks;
+['perchunk','format','bg','pos','anim','size','mode'].forEach(id=>$(id).addEventListener('change',()=>{ setupCanvas(); drawFrame(currentTime()); }));
+$('bg').addEventListener('change',()=>{ document.querySelector('.stagebox').classList.toggle('checker', $('bg').value==='transparent'); });
+
+/* ============ Rendering ============ */
+const stage=$('stage'), sctx=stage.getContext('2d');
+function canvasSize(){ const [w,h]=$('format').value.split('x').map(Number); return {w,h}; }
+function setupCanvas(){ const {w,h}=canvasSize(); [stage].forEach(c=>{c.width=w;c.height=h;}); }
+setupCanvas();
+
+/* ============ Pacing Lock (v12) ============
+   Voice ki pacing se caption ka waada: koi word pichle word ke khatam hone se pehle
+   kabhi nazar nahi aayega. Har word ka reveal time = max(apna start, pichle word ka end).
+   Slow/khencha gaya word lambi der emphasize rehta hai, tez word jaldi — caption hamesha
+   voice ki raftaar par chalta hai, chahe timing file mein boundary thori aage-peeche ho. */
+function paceWords(words){
+  let prevEnd=-1e9;
+  words.forEach(w=>{
+    w.showAt=Math.max(w.start, prevEnd);
+    if(w.end<w.showAt) w.end=w.showAt+0.08;
+    prevEnd=w.end;
+  });
+  return words;
+}
+/* ============ Viral Mode renderer (Pinterest/viral edits ke analysis par) ============
+   - Ek waqt mein sirf 1 line (kabhi kabhi chhoti line + 1 HUGE keyword), bara block kabhi nahi
+   - Har word apni boli timing par halki fade+rise se jagah par appear hota hai (layout shift nahi hota)
+   - Jo word bol raha hai us par halka sa pulse; baaki sab shaant — yehi viral smoothness hai */
+function drawViralCaption(ctx,W,H,chunk,time){
+  const st=curStyle, sizeMul=parseInt($('size').value,10)/100;
+  const posY = $('pos').value==='center'? H*0.52 : $('pos').value==='lower'? H*0.74 : H*0.28;
+  const cased = w => st.caseMode==='lower'? w.toLowerCase() : st.caseMode==='asis'? w : w.toUpperCase();
+  const words=paceWords(chunk.words.map(t=>({ text:cased(t.w), start:(t.start!==undefined?t.start:chunk.start), end:(t.end!==undefined?t.end:chunk.end) })));
+  const kw=chunk.keywordIdx, n=words.length;
+  const STACK={anton:'Anton, Impact, "Arial Black", sans-serif', mont:'Montserrat, Arial, sans-serif', serif:'"Playfair Display", Georgia, serif', script:'Caveat, cursive', poppins:'Poppins, Montserrat, sans-serif'};
+  const cleanStack= st.font==='serif'? STACK.serif : st.font==='script'? STACK.script : STACK.poppins;
+  const bigStack=STACK[st.font]||STACK.anton;
+  const baseFs=(W*0.058)*sizeMul;
+  const hugeFs=baseFs*2.25;
+  const accent= st.hlMode==='color'? (st.kwColor||st.hlBg) : ((st.hlBg==='#ffffff'||st.hlBg==='#fff6e9')? st.accBg : st.hlBg);
+  const rotAcc= st.accRotate? st.accRotate[chunk.idx % st.accRotate.length] : null;   // Hormozi 2.0 / Beast Pop: accent color har caption par rotate hota hai
+  const emphasis = n>=3 && (chunk.idx%3===2);   // har teesra caption emphasis wala, baaki saaf single line
+  const fontFor=(kind,fs)=> kind==='huge'? ((st.font==='mont'||st.font==='poppins'?'800 ':'')+(st.italic?'italic ':'')+fs+'px '+bigStack) : ((st.font==='serif'?'italic 700 ':'700 ')+fs+'px '+cleanStack);
+  // rows tayyar karo
+  let rows=[]; // {items:[{wi,kind}], fs}
+  if(emphasis){
+    const others=words.map((w,i)=>i).filter(i=>i!==kw);
+    if(others.length) rows.push({ items:others.map(i=>({wi:i,kind:'base'})), fs:baseFs });
+    rows.push({ items:[{wi:kw,kind:'huge'}], fs:hugeFs });
+  }else{
+    rows.push({ items:words.map((w,i)=>({wi:i, kind: i===kw&&n>1? 'accent':'base'})), fs:baseFs });
+  }
+  // measure + fit
+  rows.forEach(r=>{
+    r.items.forEach(it=>{ ctx.font=fontFor(it.kind, r.fs); it.w=ctx.measureText(words[it.wi].text).width; });
+    r.gap=r.fs*0.32;
+    r.width=r.items.reduce((a,it)=>a+it.w,0)+r.gap*(r.items.length-1);
+    r.height=r.fs*1.28;
+    const pad = r.items.some(it=>it.kind==='huge')? r.fs*0.55 : 0;
+    if(r.width+pad>W*0.9){ const s=(W*0.9)/(r.width+pad); r.fs*=s; r.items.forEach(it=>it.w*=s); r.width*=s; r.gap*=s; r.height*=s; }
+  });
+  const totalH=rows.reduce((a,r)=>a+r.height,0);
+  const g=Math.min(1,(H*0.5)/Math.max(totalH,1));
+  ctx.save(); ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.translate(W/2,posY); if(st.tilt) ctx.rotate(st.tilt); ctx.scale(g,g); ctx.translate(-W/2,-posY);
+  let y=posY-totalH/2;
+  const wordAnim=(w)=>{
+    const local=time-w.showAt;
+    if(local<0) return null;
+    const p=clamp(local/0.18,0,1);                    // 180ms — tez, naram (viral edits itni hi rakhte hain)
+    const active= time>=w.showAt && time<=w.end;      // Pacing Lock: emphasis poori word-duration rehta hai
+    return { a: easeOutCubic(p), dy:(1-easeOutCubic(p))*baseFs*0.22, pulse: active? 1.06 : 1 };
+  };
+  rows.forEach(r=>{
+    const cy=y+r.height/2; let x=W/2-r.width/2;
+    r.items.forEach(it=>{
+      const w=words[it.wi]; const cx=x+it.w/2; x+=it.w+r.gap;
+      const an=wordAnim(w); if(!an) return;
+      ctx.save(); ctx.globalAlpha=an.a;
+      ctx.translate(cx,cy+an.dy); ctx.scale(an.pulse,an.pulse); ctx.translate(-cx,-cy);
+      ctx.font=fontFor(it.kind, r.fs);
+      const fs=r.fs;
+      if(it.kind==='huge'){
+        if(st.hlMode==='box'||st.hlMode==='bar'){
+          const padX=fs*0.2, bh=fs*(st.hlMode==='bar'?1.3:1.24);
+          ctx.fillStyle=rotAcc||st.hlBg; ctx.fillRect(cx-it.w/2-padX, cy-bh/2, it.w+padX*2, bh);
+          ctx.fillStyle=st.hlTx; ctx.fillText(w.text,cx,cy+fs*0.03);
+        }else if(st.hlMode==='gradbox'){
+          const gr=ctx.createLinearGradient(cx-it.w/2,0,cx+it.w/2,0); const gb=st.gradBox||[st.hlBg,st.hlBg]; gr.addColorStop(0,gb[0]); gr.addColorStop(1,gb[1]);
+          const padX=fs*0.2; ctx.fillStyle=gr; ctx.fillRect(cx-it.w/2-padX, cy-fs*0.62, it.w+padX*2, fs*1.24);
+          ctx.fillStyle=st.hlTx; ctx.fillText(w.text,cx,cy+fs*0.03);
+        }else{
+          if(st.grad){ const gr=ctx.createLinearGradient(0,cy-fs/2,0,cy+fs/2); gr.addColorStop(0,st.grad[0]); gr.addColorStop(1,st.grad[1]); ctx.fillStyle=gr; }
+          else ctx.fillStyle= st.hlMode==='color'? accent : st.main;
+          if(st.glow){ ctx.shadowColor=st.glow; ctx.shadowBlur=fs*0.3; }
+          if(st.stroke){ ctx.lineWidth=fs*st.stroke.w; ctx.strokeStyle=st.stroke.c; ctx.lineJoin='round'; ctx.strokeText(w.text,cx,cy); }
+          ctx.fillText(w.text,cx,cy); ctx.shadowBlur=0;
+        }
+      }else{
+        const accEff=rotAcc||accent;
+        const spokenW= time>=w.showAt, activeW= time>=w.showAt && time<=w.end;
+        if(st.marker&&activeW){ const pr=clamp((time-w.showAt)/Math.max(w.end-w.showAt,0.05),0,1); ctx.fillStyle=st.hlBg; ctx.fillRect(cx-it.w/2-4, cy-fs*0.58, (it.w+8)*pr, fs*1.16); }   // Vox: peela marker bola gaya word ke peeche sweep hota hai
+        ctx.fillStyle= st.karaoke? (spokenW? accEff : st.main) : it.kind==='accent'? accEff : (st.marker&&activeW? '#141414' : st.main);   // Karaoke Sweep: bole gaye words rang bharte jate hain
+        ctx.shadowColor='rgba(0,0,0,.4)'; ctx.shadowBlur=7; ctx.shadowOffsetY=3;
+        if(st.stroke&&(it.kind==='accent'||st.karaoke)){ ctx.lineWidth=fs*(st.karaoke?0.05:0.06); ctx.strokeStyle=st.stroke.c; ctx.lineJoin='round'; ctx.strokeText(w.text,cx,cy); }
+        ctx.fillText(w.text,cx,cy);
+        ctx.shadowBlur=0; ctx.shadowOffsetY=0;
+      }
+      ctx.restore();
+    });
+    y+=r.height;
+  });
+  ctx.restore();
+}
+
+function drawCaption(ctx,W,H,chunk,time,forExport){
+  if($('mode').value==='viral'){ drawViralCaption(ctx,W,H,chunk,time); return; }
+  const st=curStyle, sizeMul=parseInt($('size').value,10)/100;
+  const posY = $('pos').value==='center'? H*0.5 : $('pos').value==='lower'? H*0.72 : H*0.28;
+  const animSel=$('anim').value;
+  const AUTO=['spring','pop','slide','spring','wordpop','zoom'];
+  const anim = animSel==='auto'? AUTO[(chunk.idx||0)%AUTO.length] : animSel;
+  const exitA=clamp((chunk.end-time)/0.13,0,1);
+  const hlBgEff= st.accRotate? st.accRotate[(chunk.idx||0)%st.accRotate.length] : st.hlBg;   // rotating accent (Hormozi 2.0 / Beast Pop)
+  const STOP=new Set(['ka','ki','ke','se','hai','hain','aur','to','mein','ne','ko','par','bhi','ek','ye','wo','kya','na','hi','tha','thi','kar','ho','hoga','mera','tera','uska']);
+  const cased = w => st.caseMode==='lower'? w.toLowerCase() : st.caseMode==='asis'? w : w.toUpperCase();
+  const words=paceWords(chunk.words.map(t=>({ text:cased(t.w), start:(t.start!==undefined?t.start:chunk.start), end:(t.end!==undefined?t.end:chunk.end) })));
+  const kw=chunk.keywordIdx, n=words.length;
+
+  /* ---- fonts: ek caption ke andar teen fonts (professional typography mix) ---- */
+  const STACK={anton:'Anton, Impact, "Arial Black", sans-serif', mont:'Montserrat, Arial, sans-serif', serif:'"Playfair Display", Georgia, serif', script:'Caveat, cursive', poppins:'Poppins, Montserrat, sans-serif'};
+  const bigStack=STACK[st.font]||STACK.anton;
+  const altStack= st.font==='serif'? STACK.anton : STACK.serif;   // contrasting doosra font
+  const smallStack=STACK[st.fontSmall]||STACK.mont;
+  const bigBase=(W*0.148)*sizeMul, smallBase=(W*0.041)*sizeMul;
+  const fontStr=(role,fs)=>{
+    if(role==='small') return (st.fontSmall==='script'?'700 ':'700 ')+fs+'px '+smallStack;
+    if(role==='alt') return 'italic 800 '+fs+'px '+altStack;
+    const wt= st.font==='mont'||st.font==='poppins'? '800 ' : st.font==='serif'? '800 ' : st.font==='script'? '700 ' : '';
+    return (st.italic?'italic ':'')+wt+fs+'px '+bigStack;
+  };
+
+  /* ---- lines banao (har line = words ki list, har word ka apna role) ---- */
+  // role: 'small' (patla spaced caps) | 'big' (primary font huge) | 'alt' (serif italic) | 'kw' (keyword treatment)
+  let lines=[];
+  const mk=(wi,role,fsMul)=>({ wi, role, fsMul:fsMul||1 });
+  if(chunk.layout===0){
+    // Reference Mix: small caps upar, HUGE keyword beech mein, serif italic neeche
+    const before=[], after=[];
+    words.forEach((w,i)=>{ if(i<kw)before.push(i); else if(i>kw)after.push(i); });
+    if(n===1){ lines.push([mk(kw,'kw',1.15)]); }
+    else{
+      if(before.length) lines.push(before.map(i=>mk(i,'small')));
+      lines.push([mk(kw,'kw',1.08)]);
+      if(after.length) lines.push(after.map(i=>mk(i,'alt',0.62)));
+      if(!before.length&&!after.length) lines.push([mk(kw,'kw',1.1)]);
+    }
+  }else if(chunk.layout===1){
+    // Two-row Mix: pehli row primary font, doosri row serif italic — keyword jahan ho wahan highlight
+    if(n<=2){ lines.push(words.map((w,i)=>mk(i, i===kw?'kw':'big', 1.0))); }
+    else{
+      const half=Math.ceil(n/2);
+      lines.push(words.slice(0,half).map((w,j)=>mk(j, j===kw?'kw':'big', 0.94)));
+      lines.push(words.slice(half).map((w,j)=>mk(half+j, (half+j)===kw?'kw':'alt', 0.8)));
+    }
+  }else{
+    // Stack Mix: har word apni line — fonts badal badal kar, chhote connector words chhote caps mein
+    words.forEach((w,i)=>{
+      const plain=w.text.toLowerCase().replace(/[^a-z0-9]/g,'');
+      if(i===kw) lines.push([mk(i,'kw',1.05)]);
+      else if(STOP.has(plain)&&n>2) lines.push([mk(i,'small')]);
+      else lines.push([mk(i, (i%2? 'alt':'big'), i%2? 0.72:0.98)]);
+    });
+  }
+
+  /* ---- measure: har word ki width, har line ki height; phir poora block screen ke andar fit karo ---- */
+  const baseFs=role=> role==='small'? smallBase : role==='alt'? bigBase*0.8 : bigBase;
+  lines.forEach(line=>{
+    line.forEach(it=>{ it.fs=baseFs(it.role)*it.fsMul; ctx.font=fontStr(it.role,it.fs); try{ctx.letterSpacing= it.role==='small'? (it.fs*0.3)+'px':'1px';}catch(e){} it.w=ctx.measureText(words[it.wi].text).width; });
+    line.gap=Math.max(...line.map(it=>it.fs))*0.3;
+    line.width=line.reduce((a,it)=>a+it.w,0)+line.gap*(line.length-1);
+    line.height=Math.max(...line.map(it=>it.fs))*1.24;
+    // line zyada chauri ho to usi line ka font chhota karo — keyword box ki padding aur
+    // spring animation ke overshoot ka margin bhi shamil hai, taake kabhi bahar na jaye
+    const maxFs=Math.max(...line.map(it=>it.fs));
+    const effW=line.width + (line.some(it=>it.role==='kw')? maxFs*0.55 : 0);
+    const limit=W*0.88;
+    if(effW>limit){ const r=limit/effW; line.forEach(it=>{ it.fs*=r; it.w*=r; }); line.width*=r; line.height*=r; line.gap*=r; }
+  });
+  const totalH=lines.reduce((a,l)=>a+l.height,0);
+  const maxBlockH=H*0.62;
+  const gScale=Math.min(1, maxBlockH/Math.max(totalH,1));   // <-- kabhi screen se bahar nahi jayega
+
+  ctx.save();
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.translate(W/2,posY); ctx.scale(gScale,gScale); ctx.translate(-W/2,-posY);
+  let y=posY-totalH/2;
+
+  const paintItem=(it,cx,cy)=>{
+    const fs=it.fs, txt=words[it.wi].text;
+    ctx.font=fontStr(it.role,fs);
+    try{ctx.letterSpacing= it.role==='small'? (fs*0.3)+'px':'1px';}catch(e){}
+    if(it.role==='small'){
+      ctx.fillStyle=st.small; ctx.shadowColor='rgba(0,0,0,.35)'; ctx.shadowBlur=6; ctx.shadowOffsetY=3;
+      ctx.fillText(txt,cx,cy); ctx.shadowBlur=0; ctx.shadowOffsetY=0; return;
+    }
+    if(it.role==='alt'){
+      ctx.fillStyle=st.main; ctx.shadowColor= st.glow? st.glow : 'rgba(0,0,0,.35)'; ctx.shadowBlur= st.glow? fs*0.3:8; ctx.shadowOffsetY= st.glow?0:4;
+      ctx.fillText(txt,cx,cy); ctx.shadowBlur=0; ctx.shadowOffsetY=0; return;
+    }
+    if(it.role==='kw'){
+      if(st.hlMode==='color'){ ctx.fillStyle=st.kwColor||st.hlBg; if(st.glow){ctx.shadowColor=st.glow; ctx.shadowBlur=fs*0.3;} ctx.fillText(txt,cx,cy); ctx.shadowBlur=0; return; }
+      if(st.hlMode==='none'){
+        if(st.grad){ const g=ctx.createLinearGradient(0,cy-fs/2,0,cy+fs/2); g.addColorStop(0,st.grad[0]); g.addColorStop(1,st.grad[1]); ctx.fillStyle=g; } else ctx.fillStyle=st.main;
+        if(st.stroke){ ctx.lineWidth=fs*st.stroke.w; ctx.strokeStyle=st.stroke.c; ctx.lineJoin='round'; ctx.strokeText(txt,cx,cy); }
+        ctx.fillText(txt,cx,cy); return;
+      }
+      const padX=fs*0.22, padY=fs*0.15, tw=it.w;
+      if(st.hlMode==='gradbox'){ const g=ctx.createLinearGradient(cx-tw/2,0,cx+tw/2,0); const gb=st.gradBox||[hlBgEff,hlBgEff]; g.addColorStop(0,gb[0]); g.addColorStop(1,gb[1]); ctx.fillStyle=g; }
+      else ctx.fillStyle=hlBgEff;
+      if(st.glow){ ctx.shadowColor=st.glow; ctx.shadowBlur=fs*0.3; }
+      const bh= st.hlMode==='bar'? fs*1.34 : fs+padY*2;
+      ctx.fillRect(cx-tw/2-padX*(st.hlMode==='bar'?1.7:1), cy-bh/2, tw+padX*2*(st.hlMode==='bar'?1.7:1), bh);
+      ctx.shadowBlur=0;
+      ctx.fillStyle=st.hlTx;
+      if(st.stroke){ ctx.lineWidth=fs*st.stroke.w; ctx.strokeStyle=st.stroke.c; ctx.lineJoin='round'; ctx.strokeText(txt,cx,cy+fs*0.03); }
+      ctx.fillText(txt,cx,cy+fs*0.03); return;
+    }
+    // big
+    ctx.save();
+    if(st.glow){ ctx.shadowColor=st.glow; ctx.shadowBlur=fs*0.32; } else { ctx.shadowColor='rgba(0,0,0,.35)'; ctx.shadowBlur=8; ctx.shadowOffsetY=4; }
+    if(st.grad){ const g=ctx.createLinearGradient(0,cy-fs/2,0,cy+fs/2); g.addColorStop(0,st.grad[0]); g.addColorStop(1,st.grad[1]); ctx.fillStyle=g; } else ctx.fillStyle=st.main;
+    if(st.stroke){ ctx.lineWidth=fs*st.stroke.w; ctx.strokeStyle=st.stroke.c; ctx.lineJoin='round'; ctx.strokeText(txt,cx,cy); }
+    ctx.fillText(txt,cx,cy);
+    ctx.restore();
+  };
+
+  lines.forEach(line=>{
+    const cy=y+line.height/2;
+    let x=W/2-line.width/2;
+    line.forEach(it=>{
+      const cx=x+it.w/2; x+=it.w+line.gap;
+      /* har word apni asal boli-jane-wali timing par animate hota hai — Pacing Lock: pichle word ke end se pehle nahi */
+      const local=time-words[it.wi].showAt;
+      const dur= anim==='bounce'? 0.55 : 0.48;
+      const p=clamp(local/dur,0,1);
+      if(local< -0.02) return;                    // word abhi bola nahi gaya, mat dikhao
+      let scale=1, dy=0, rot=0, alpha=Math.min(1,p*1.9)*exitA;
+      if(anim==='spring'){ const s=springEase(p); scale=0.5+0.5*s; dy=(1-easeOutExpo(p))*H*0.016; rot=(1-easeOutExpo(p))*-0.028; }
+      else if(anim==='pop'){ scale=0.55+0.45*easeOutBack(p); }
+      else if(anim==='bounce'){ scale=0.45+0.55*easeOutBounce(p); }
+      else if(anim==='slide'){ scale=0.94+0.06*easeOutExpo(p); dy=(1-easeOutExpo(p))*H*0.05; }
+      else if(anim==='wordpop'){ const s=springEase(p); scale=0.4+0.6*s; rot=(1-easeOutExpo(p))*0.03; }
+      else if(anim==='zoom'){ scale=0.8+0.2*easeOutExpo(p); }
+      ctx.save(); ctx.globalAlpha=alpha;
+      ctx.translate(cx,cy+dy); ctx.rotate(rot); ctx.scale(scale,scale); ctx.translate(-cx,-cy);
+      paintItem(it,cx,cy);
+      ctx.restore();
+    });
+    y+=line.height;
+  });
+  ctx.restore();
+}
+
+function drawFrame(time){
+  const {w:W,h:H}=canvasSize();
+  if($('bg').value==='transparent'){ sctx.clearRect(0,0,W,H); }
+  else { sctx.fillStyle=$('bg').value; sctx.fillRect(0,0,W,H); }
+  const ch=chunks.find(c=>time>=c.start&&time<c.end);
+  if(ch) drawCaption(sctx,W,H,ch,time,false);
+  $('clock').textContent=time.toFixed(1)+'s / '+(audioDur||0).toFixed(1)+'s';
+  $('curchunk').textContent= ch? '— '+ch.words.map(x=>x.w).join(' ') : '';
+}
+function currentTime(){
+  if(exportMode) return exportT;
+  if(audioURL && !player.paused) return player.currentTime;
+  if(playing) return startOffset+(performance.now()-startedAt)/1000;
+  return lastT;
+}
+let lastT=0, exportT=0, exportCancel=false;
+function loop(){
+  if(!playing) return;
+  const t=currentTime(); lastT=t;
+  const dur=audioDur|| (chunks.length? chunks[chunks.length-1].end:0);
+  if(t>dur+0.05){ stopPreview(); drawFrame(0); lastT=0; return; }
+  drawFrame(t); rafId=requestAnimationFrame(loop);
+}
+function startPreview(){
+  if(!chunks.length){ $('sstatus').textContent='Please sync first (Step 3).'; $('sstatus').className='status err'; return; }
+  if(typeof stopEdPreview==='function') stopEdPreview();
+  playing=true; $('play').textContent='⏸ Pause';
+  if(audioURL){ player.currentTime=lastT||0; player.play().catch(()=>{}); startedAt=performance.now(); startOffset=player.currentTime; }
+  else { startedAt=performance.now(); startOffset=lastT||0; }
+  cancelAnimationFrame(rafId); loop();
+}
+function stopPreview(){ playing=false; $('play').textContent='▶ Play Preview'; if(audioURL) player.pause(); cancelAnimationFrame(rafId); }
+$('play').onclick=()=>{ if(playing){ lastT=currentTime(); stopPreview(); } else startPreview(); };
+$('stop').onclick=()=>{ lastT=0; stopPreview(); if(audioURL)player.currentTime=0; drawFrame(0); };
+player.addEventListener('timeupdate',()=>{ if(!playing) { lastT=player.currentTime; drawFrame(lastT); }});
+
+/* ============ My Preset: apni pasandeeda settings ek click mein ============ */
+const PRESET_KEY='hinglishCaptionPresetV1';
+function collectPreset(){ return { style:curStyle.id, mode:$('mode').value, format:$('format').value, bg:$('bg').value, perchunk:$('perchunk').value, anim:$('anim').value, pos:$('pos').value, size:$('size').value, offset:$('offset').value }; }
+function applyPreset(p){ if(!p) return false;
+  const st=STYLES.find(x=>x.id===p.style); if(st){ curStyle=st; document.querySelectorAll('.stylecard').forEach(c=>c.classList.toggle('sel',c.dataset.id===st.id)); }
+  const set=(id,v)=>{ if(v!==undefined&&$(id)) $(id).value=v; };
+  set('mode',p.mode); set('format',p.format); set('bg',p.bg); set('perchunk',p.perchunk); set('anim',p.anim); set('pos',p.pos); set('size',p.size); set('offset',p.offset);
+  setupCanvas(); if(chunks.length) buildChunks(); drawFrame(lastT||0); return true; }
+$('presetsave').onclick=()=>{ try{ localStorage.setItem(PRESET_KEY, JSON.stringify(collectPreset())); $('estatus').className='status ok'; $('estatus').textContent='✅ Preset saved — next time it will load automatically.'; }catch(e){ $('estatus').className='status err'; $('estatus').textContent='Preset could not be saved in this browser.'; } };
+$('presetapply').onclick=()=>{ let p=null; try{ p=JSON.parse(localStorage.getItem(PRESET_KEY)||'null'); }catch(e){}
+  if(applyPreset(p)){ $('estatus').className='status ok'; $('estatus').textContent='✅ Your preset applied.'; } else { $('estatus').className='status err'; $('estatus').textContent='No saved preset yet — set your style, then press Save Preset.'; } };
+try{ const savedP=JSON.parse(localStorage.getItem(PRESET_KEY)||'null'); if(savedP&&savedP.style) setTimeout(()=>{ const st=STYLES.find(x=>x.id===savedP.style); if(st){ curStyle=st; document.querySelectorAll('.stylecard').forEach(c=>c.classList.toggle('sel',c.dataset.id===st.id)); } ['mode','format','bg','perchunk','anim','pos','size','offset'].forEach(k=>{ if(savedP[k]!==undefined&&$(k)) $(k).value=savedP[k]; }); setupCanvas(); if(chunks.length) buildChunks(); drawFrame(lastT||0); },50); }catch(e){}
+
+/* ============ Export (green-screen video) ============ */
+/* ============ Export voice (v14 fix) ============
+   Awaaz hamesha DECODED audio data se record hoti hai — live element ki capture
+   (captureStream / MediaElementSource) bhaari rendering ke neeche atakti/phansti thi,
+   isiliye exported video mein voiceover phans phans kar aata tha jabke preview saaf tha.
+   Buffer se recording sample-perfect hai, aur baar baar export bhi kharab nahi hota. */
+async function makeVoiceDest(actx){
+  let buf=audioBuffer;
+  if(!buf&&audioFile){ try{ buf=await actx.decodeAudioData(await audioFile.arrayBuffer()); }catch(e){} }
+  if(!buf) return null;
+  const dest=actx.createMediaStreamDestination();
+  const src=actx.createBufferSource(); src.buffer=buf; src.connect(dest);
+  return { dest, start(when){ try{ src.start(when||0); }catch(e){} } };
+}
+function scaledSize(sel,w,h){ /* Fast 720p: chhoti canvas = tez encode, halki file */
+  if(!sel||sel.value!=='fast') return {w,h};
+  const long=Math.max(w,h); if(long<=1280) return {w,h};
+  const f=1280/long; return { w:Math.round(w*f/2)*2, h:Math.round(h*f/2)*2 };
+}
+/* ============ v15 SMOOTH EXPORT — frame-by-frame engine ============
+   Asli problem (v14 tak): export ek LIVE recording thi — canvas.captureStream +
+   MediaRecorder realtime mein frames pakarta tha. PC slow ho to browser kuch
+   frames paint hi nahi kar pata tha → woh frames file mein gir jate thay (video
+   lag) aur recorder ke andar awaaz phans jati thi. Preview is liye saaf thi ke
+   woh record nahi hoti.
+   Naya engine: koi realtime recording nahi. Har frame us ke EXACT time par paint
+   hota hai aur WebCodecs se encode hota hai; awaaz OfflineAudioContext mein
+   pehle se mix hokar sample-exact encode hoti hai. PC slow ho to export sirf
+   zyada time lega — frame kabhi nahi girega, awaaz kabhi nahi phansegi.
+   Agar browser/engine kahin fail ho jaye to purana MediaRecorder tareeqa
+   (fallback, woh bhi v15 mein halka kiya gaya) khud chal jata hai. */
+const EXPORT_FPS=30;
+function exportFrameCount(dur){ return Math.max(1, Math.round(dur*EXPORT_FPS)); }
+function exportFrameTime(i){ return i/EXPORT_FPS; }
+let _muxerMod=null;
+async function loadMuxer(){
+  if(_muxerMod) return _muxerMod;
+  _muxerMod=await import('https://cdn.jsdelivr.net/npm/mp4-muxer@5.2.2/build/mp4-muxer.mjs');
+  if(!_muxerMod||!_muxerMod.Muxer||!_muxerMod.ArrayBufferTarget) throw new Error('MP4 library load nahi hui');
+  return _muxerMod;
+}
+async function getVoiceBuffer(){
+  if(audioBuffer) return audioBuffer;
+  if(audioFile){ const ctx=new (window.AudioContext||window.webkitAudioContext)(); try{ const b=await ctx.decodeAudioData(await audioFile.arrayBuffer()); audioBuffer=b; return b; }catch(e){} try{ ctx.close(); }catch(e){} }
+  return null;
+}
+/* Audience edition: editor removed — music/SFX state stubbed to empty so the shared audio mixer stays valid */
+let edMusic=null, edSfx=[];
+function edMusicRange(){ return [0, 1e9]; }
+function edSfxTime(fx){ return (fx && fx.offset) || 0; }
+async function getMusicBuffer(){
+  if(!edMusic||!edMusic.el||!edMusic.el.src) return null;
+  try{ const ab=await (await fetch(edMusic.el.src)).arrayBuffer(); const oc=new OfflineAudioContext(1,44100,44100); return await oc.decodeAudioData(ab); }catch(e){ return null; }
+}
+/* voice (+ editor mein music/SFX) ko ek hi stereo buffer mein offline mix karta hai */
+async function renderMixBuffer(dur,opts){
+  opts=opts||{}; const sr=48000, len=Math.max(1,Math.ceil(dur*sr));
+  const oc=new OfflineAudioContext(2,len,sr); let any=false;
+  if(opts.voice!==false){ const vb=await getVoiceBuffer(); if(vb){ const s=oc.createBufferSource(); s.buffer=vb; s.connect(oc.destination); s.start(0); any=true; } }
+  if(opts.music&&edMusic){ const mb=await getMusicBuffer(); if(mb){ const r=edMusicRange(), a=r[0], b=Math.min(r[1],dur);
+    if(b>a+0.05){ const g=oc.createGain(); g.gain.value=edMusic.vol; g.connect(oc.destination); let pos=a, guard=0;
+      while(pos<b-0.01&&guard++<600){ const s=oc.createBufferSource(); s.buffer=mb; s.connect(g); const remain=b-pos;
+        if(mb.duration<=remain){ s.start(pos); pos+=mb.duration; } else { s.start(pos,0,remain); pos=b; } } any=true; } } }
+  if(opts.sfx){ edSfx.forEach(fx=>{ if(!fx.buffer) return; const at=edSfxTime(fx); if(at>=dur) return;
+    const s=oc.createBufferSource(); s.buffer=fx.buffer; const g=oc.createGain(); g.gain.value=fx.vol||0.8; s.connect(g); g.connect(oc.destination); s.start(Math.max(0,at)); any=true; }); }
+  if(!any) return null;
+  return await oc.startRendering();
+}
+async function seekVideoEl(el,target){
+  if(!el||el.readyState<2) return;
+  const d=el.duration; if(!d||!isFinite(d)) return;
+  const tgt=((target%d)+d)%d;
+  if(Math.abs(el.currentTime-tgt)<0.015) return;
+  try{ el.pause(); }catch(e){}
+  await new Promise(res=>{ let done=false; const fin=()=>{ if(done) return; done=true; try{ el.removeEventListener('seeked',fin); }catch(e){} res(); };
+    el.addEventListener('seeked',fin); try{ el.currentTime=tgt; }catch(e){ fin(); } setTimeout(fin,160); });
+}
+async function pickVideoCodec(W,H,bitrate){
+  const cands=['avc1.640033','avc1.640028','avc1.4d4028','avc1.42001f'];
+  for(const hw of [true,false]) for(const c of cands){ try{ const cfg={codec:c,width:W,height:H,bitrate,framerate:EXPORT_FPS}; if(hw) cfg.hardwareAcceleration='prefer-hardware';
+    const s=await VideoEncoder.isConfigSupported(cfg); if(s&&s.supported) return c; }catch(e){} }
+  return null;
+}
+async function pickAudioCodec(sr,ch){
+  const cands=[{mux:'aac',enc:'mp4a.40.2'},{mux:'opus',enc:'opus'}];
+  for(const c of cands){ try{ const s=await AudioEncoder.isConfigSupported({codec:c.enc,sampleRate:sr,numberOfChannels:ch,bitrate:128000}); if(s&&s.supported) return c; }catch(e){} }
+  return null;
+}
+function makeAudioData(buf,startFrame,frames){
+  const ch=Math.min(2,buf.numberOfChannels), sr=buf.sampleRate;
+  const data=new Float32Array(frames*ch);
+  for(let c=0;c<ch;c++){ const src=buf.getChannelData(Math.min(c,buf.numberOfChannels-1)); data.set(src.subarray(startFrame,startFrame+frames), c*frames); }
+  return new AudioData({ format:'f32-planar', sampleRate:sr, numberOfFrames:frames, numberOfChannels:ch, timestamp:Math.round(startFrame/sr*1e6), data:data.buffer });
+}
+async function webcodecsExport(o){
+  const MB=await loadMuxer();
+  const bitrate=o.bitrate||10_000_000;
+  const vcodec=await pickVideoCodec(o.W,o.H,bitrate); if(!vcodec) throw new Error('H.264 encoder nahi mila');
+  let ac=null, sr=48000, ch=0;
+  if(o.mix){ sr=o.mix.sampleRate; ch=Math.min(2,o.mix.numberOfChannels); ac=await pickAudioCodec(sr,ch); if(!ac) throw new Error('Audio encoder nahi mila'); }
+  const target=new MB.ArrayBufferTarget();
+  const mx={ target, video:{codec:'avc',width:o.W,height:o.H}, fastStart:'in-memory', firstTimestampBehavior:'offset' };
+  if(ac) mx.audio={codec:ac.mux, sampleRate:sr, numberOfChannels:ch};
+  const muxer=new MB.Muxer(mx);
+  let encErr=null;
+  const venc=new VideoEncoder({ output:(c,m)=>{ try{ muxer.addVideoChunk(c,m); }catch(e){ encErr=encErr||e; } }, error:e=>{ encErr=encErr||e; } });
+  venc.configure({ codec:vcodec, width:o.W, height:o.H, bitrate, framerate:EXPORT_FPS });
+  let aenc=null;
+  if(ac){ aenc=new AudioEncoder({ output:(c,m)=>{ try{ muxer.addAudioChunk(c,m); }catch(e){ encErr=encErr||e; } }, error:e=>{ encErr=encErr||e; } });
+    aenc.configure({ codec:ac.enc, sampleRate:sr, numberOfChannels:ch, bitrate:128000 });
+    const total=o.mix.length, step=Math.floor(sr/2);
+    for(let f=0; f<total; f+=step){ if(o.isCancelled()){ try{ aenc.close(); }catch(e){} try{ venc.close(); }catch(e){} return {cancelled:true}; }
+      const ad=makeAudioData(o.mix, f, Math.min(step,total-f)); aenc.encode(ad); ad.close();
+      if(aenc.encodeQueueSize>16) await new Promise(r=>setTimeout(r,5)); } }
+  const n=exportFrameCount(o.dur);
+  window.__frameExport=true;
+  try{
+    for(let i=0;i<n;i++){
+      if(o.isCancelled()){ try{ venc.close(); }catch(e){} if(aenc){ try{ aenc.close(); }catch(e){} } return {cancelled:true}; }
+      const t=exportFrameTime(i);
+      await o.paint(t);
+      if(encErr) throw encErr;
+      const frame=new VideoFrame(o.canvas,{ timestamp:Math.round(t*1e6), duration:Math.round(1e6/EXPORT_FPS) });
+      venc.encode(frame,{ keyFrame:(i%(EXPORT_FPS*2))===0 }); frame.close();
+      if(venc.encodeQueueSize>12){ await new Promise(res=>{ const chk=()=>{ if(venc.encodeQueueSize<=6||encErr||o.isCancelled()) res(); else setTimeout(chk,8); }; chk(); }); }
+      if(encErr) throw encErr;
+      o.onProgress((i+1)/n);
+      if(i%24===23) await new Promise(r=>setTimeout(r,0));
+    }
+  } finally { window.__frameExport=false; }
+  if(aenc){ await aenc.flush(); try{ aenc.close(); }catch(e){} }
+  await venc.flush(); try{ venc.close(); }catch(e){}
+  if(encErr) throw encErr;
+  muxer.finalize();
+  return { blob:new Blob([target.buffer],{type:'video/mp4'}) };
+}
+function downloadBlob(blob,fname){ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=fname; a.click(); }
+
+$('exportcancel').onclick=()=>{ exportCancel=true; };
+$('export').onclick=async()=>{
+  if(!chunks.length){ $('estatus').textContent='Please sync the captions first.'; $('estatus').className='status err'; return; }
+  if($('bg').value==='transparent'||!window.VideoEncoder||!window.AudioEncoder){ return studioFallbackExport(); }
+  const btn=$('export'); btn.disabled=true; $('eprog').style.display='block'; $('estatus').className='status'; $('exportcancel').style.display='block'; exportCancel=false;
+  stopPreview();
+  let res=null, failed=null;
+  try{
+    const {w:W,h:H}=scaledSize($('expquality'),...Object.values(canvasSize()));
+    const dur=(audioDur||chunks[chunks.length-1].end);
+    $('estatus').textContent='Preparing smooth export… awaaz mix ho rahi hai';
+    const mix=await renderMixBuffer(dur,{});
+    const off=document.createElement('canvas'); off.width=W; off.height=H; const octx=off.getContext('2d');
+    exportMode=true; exportT=0;
+    res=await webcodecsExport({ canvas:off, W, H, dur, mix, bitrate:($('expquality')&&$('expquality').value==='fast')?6_000_000:10_000_000,
+      isCancelled:()=>exportCancel,
+      onProgress:f=>{ $('eprog').value=Math.round(f*100); $('estatus').textContent='🎬 Smooth exporting... '+Math.round(f*100)+'% — frame-by-frame ban raha hai, PC slow ho to bhi video nahi atkegi.'; },
+      paint:async t=>{ exportT=t; octx.fillStyle=$('bg').value; octx.fillRect(0,0,W,H); const ch=chunks.find(c=>t>=c.start&&t<c.end); if(ch) drawCaption(octx,W,H,ch,t,true); } });
+  }catch(err){ failed=err; }
+  exportMode=false; btn.disabled=false; $('eprog').style.display='none'; $('exportcancel').style.display='none';
+  if(failed){ console.warn('Smooth export failed:',failed); $('estatus').textContent='Smooth export is browser mein nahi chala — purana tareeqa try kar raha hoon…'; return studioFallbackExport(); }
+  if(!res||res.cancelled){ if(res&&res.cancelled){ $('estatus').className='status'; $('estatus').textContent='⏹ Export cancelled — no file was saved. You can export again any time.'; } return; }
+  downloadBlob(res.blob,'hinglish-captions-greenscreen.mp4');
+  $('estatus').className='status ok';
+  $('estatus').textContent='✅ Export complete! File downloaded: hinglish-captions-greenscreen.mp4 (smooth frame-by-frame export)\nNow in CapCut: Overlay → Chroma Key to remove the '+($('bg').value==='#ff00ff'?'magenta':$('bg').value==='#0000ff'?'blue':'green')+'.';
+};
+async function studioFallbackExport(){
+  if(!chunks.length){ $('estatus').textContent='Please sync the captions first.'; $('estatus').className='status err'; return; }
+  const btn=$('export'); btn.disabled=true; $('eprog').style.display='block'; $('estatus').className='status';
+  stopPreview();
+  try{
+    const {w:W,h:H}=scaledSize($('expquality'),...Object.values(canvasSize()));
+    const off=document.createElement('canvas'); off.width=W; off.height=H; /* v15 fix: ye canvas pehle banta hi nahi tha */
+    const octx=off.getContext('2d');
+    const stream=off.captureStream(30);
+    // audio track: decoded buffer se (live capture nahi — stutter fix v14)
+    let actx=null, voice=null;
+    if(audioURL){
+      actx=new (window.AudioContext||window.webkitAudioContext)();
+      voice=await makeVoiceDest(actx);
+      if(voice) voice.dest.stream.getAudioTracks().forEach(t=>stream.addTrack(t));
+    }
+    const transparent=$('bg').value==='transparent';
+    const mime=(transparent? ['video/webm;codecs=vp9','video/webm;codecs=vp8','video/webm'] : ['video/mp4;codecs=avc1','video/mp4','video/webm;codecs=vp9','video/webm']).find(m=>{try{return MediaRecorder.isTypeSupported(m);}catch(e){return false;}});
+    const rec=new MediaRecorder(stream,{mimeType:mime, videoBitsPerSecond:8_000_000, audioBitsPerSecond:128_000});
+    const blobs=[]; rec.ondataavailable=e=>{ if(e.data.size) blobs.push(e.data); };
+    const done=new Promise(r=>rec.onstop=r);
+    const dur=(audioDur||chunks[chunks.length-1].end);
+    exportMode=true; exportT=0;
+    // SYNC FIX: pehle audio ko 0 par seek karke play karo, recorder us ke BAAD start karo —
+    // warna recorded file mein shuru ki khamoshi captions ko awaz se peeche kar deti thi (drift ki bari wajah)
+    if(audioURL){
+      player.currentTime=0;
+      await new Promise(r=>{ const h=()=>{ player.removeEventListener('seeked',h); r(); }; player.addEventListener('seeked',h); setTimeout(r,600); });
+      await player.play();
+      if(voice&&actx) voice.start(actx.currentTime+0.03);
+      await new Promise(r=>setTimeout(r,30));
+    }
+    rec.start(250);
+    exportCancel=false; $('exportcancel').style.display='block';
+    const t0=performance.now();
+    await new Promise(resolve=>{
+      let finished=false, wd=null;
+      const finish=()=>{ if(finished) return; finished=true; if(wd) clearInterval(wd); resolve(); };
+      const tick=()=>{
+        if(finished) return;
+        exportT=(performance.now()-t0)/1000;
+        if(audioURL) exportT=player.currentTime;
+        if(transparent) octx.clearRect(0,0,W,H); else { octx.fillStyle=$('bg').value; octx.fillRect(0,0,W,H); }
+        const ch=chunks.find(c=>exportT>=c.start&&exportT<c.end);
+        if(ch) drawCaption(octx,W,H,ch,exportT,true);
+        $('eprog').value=clamp(exportT/dur*100,0,100);
+        $('estatus').textContent='Exporting... '+Math.round(clamp(exportT/dur*100,0,100))+'%';
+        if(exportCancel || exportT>=dur-0.02 || (audioURL&&player.ended)){ finish(); return; }
+      };
+      const rafLoop=()=>{ if(finished) return; tick(); requestAnimationFrame(rafLoop); };
+      rafLoop();
+      wd=setInterval(()=>{ if(exportCancel || (audioURL&&player.ended)) finish(); },250);   /* watchdog: sirf khatm hona check karta hai, paint nahi (double paint = lag) */
+    });
+    if(audioURL) player.pause();
+    rec.stop(); await done; exportMode=false;
+    if(actx) actx.close();
+    if(exportCancel){ $('estatus').className='status'; $('estatus').textContent='⏹ Export cancelled — no file was saved. You can export again any time.'; return; }
+    const ext=mime.includes('mp4')?'mp4':'webm';
+    const blob=new Blob(blobs,{type:mime.split(';')[0]});
+    const fname= transparent? 'hinglish-captions-transparent.webm' : 'hinglish-captions-greenscreen.'+ext;
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=fname; a.click();
+    $('estatus').textContent='✅ Export complete! File downloaded: '+fname+'\n'+(transparent? 'Just place it over your video in any editor — NO chroma key needed.' : 'Now in CapCut: Overlay → Chroma Key to remove the '+($('bg').value==='#ff00ff'?'magenta':$('bg').value==='#0000ff'?'blue':'green')+'.');
+  }catch(err){
+    console.error(err); exportMode=false;
+    $('estatus').className='status err';
+    $('estatus').textContent='⚠️ Export failed: '+(err.message||err)+' — try in the Chrome browser, and do not close the tab during export.';
+  }finally{ btn.disabled=false; $('eprog').style.display='none'; $('exportcancel').style.display='none'; }
+};
+
+/* ============ SRT export ============ */
+function srtTime(t){ const p=(n,l=2)=>String(n).padStart(l,'0'); const ms=Math.floor((t%1)*1000); t=Math.floor(t); return p(Math.floor(t/3600))+':'+p(Math.floor(t/60)%60)+':'+p(t%60)+','+p(ms,3); }
+$('srt').onclick=()=>{
+  if(!chunks.length){ $('estatus').textContent='Please sync the captions first.'; $('estatus').className='status err'; return; }
+  const srt=chunks.map((c,i)=>(i+1)+'\n'+srtTime(c.start)+' --> '+srtTime(c.end)+'\n'+c.words.map(w=>w.w.toUpperCase()).join(' ')+'\n').join('\n');
+  const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([srt],{type:'text/plain'})); a.download='captions.srt'; a.click();
+  $('estatus').textContent='✅ captions.srt downloaded.';
+};
+
+// init fonts then first paint
+if(document.fonts&&document.fonts.ready){ document.fonts.ready.then(()=>drawFrame(0)); }
+drawFrame(0);
+</script>
+</body>
+</html>
