@@ -82,12 +82,19 @@
   .socials a:hover{border-color:#ffd400;color:#ffd400;transform:translateY(-1px)}
   .socials a small{color:#9a9aa6;font-weight:600}
   .socials a:hover small{color:#ffd400}
+
+  /* v1.1 layout fix: preview panel can never overlap the settings column */
+  main>*{min-width:0}
+  .card{min-width:0}
+  select,textarea,input,button{max-width:100%}
+  .stylecard .pv .pvbig{font-size:19px}
+  @media(max-width:1250px){ main{grid-template-columns:1fr} .stagewrap{position:static} }
 </style>
 </head>
 <body>
 <header>
   <h1>Digii Bro <span>Hinglish Caption</span> Tool <span class="verbadge">Audience Edition</span></h1>
-  <p class="sub">Turn your <b>final voiceover</b> — or even faster, your <b>SRT file</b> (perfect timing, zero transcription wait) — into <b>animated Hinglish captions</b> in <b>28 trending styles</b> with smooth, After Effects-style motion: small words + <b>HUGE bold words</b> + a highlighted keyword, on a <b>green screen</b> — or with a <b>fully transparent background</b>, no chroma key needed. Then drop the caption video over your edit in CapCut. Everything is <b>completely free</b> — even transcription runs inside your browser. No API key, no sign-up, no cost.</p>
+  <p class="sub">Turn your <b>final voiceover</b> — or even faster, your <b>SRT file</b> (perfect timing, zero transcription wait) — into <b>animated Hinglish captions</b> in <b>34 trending styles</b> with smooth, After Effects-style motion: small words + <b>HUGE bold words</b> + a highlighted keyword, on a <b>green screen</b> — or with a <b>fully transparent background</b>, no chroma key needed. Then drop the caption video over your edit in CapCut. Everything is <b>completely free</b> — even transcription runs inside your browser. No API key, no sign-up, no cost.</p>
   <div class="socials">
     <a href="https://www.instagram.com/digiibro" target="_blank" rel="noopener">📸 Instagram <small>@digiibro</small></a>
     <a href="https://www.tiktok.com/@digiibro" target="_blank" rel="noopener">🎵 TikTok <small>@digiibro</small></a>
@@ -381,7 +388,13 @@ const STYLES=[
  {id:'mint', name:'🆕 Mint Fresh', desc:'Clean caps with a mint highlight box — fresh tech look', main:'#ffffff', small:'#ffffff', hlBg:'#6ee7b7', hlTx:'#052e22', accBg:'#6ee7b7', accTx:'#052e22', font:'mont', caseMode:'upper', hlMode:'box', sampleSmall:'bilkul', sampleBig:'FRESH', sampleKw:'LOOK'},
  {id:'peach', name:'🆕 Peach Sorbet', desc:'Warm peach-to-coral gradient words — aesthetic lifestyle reels', main:'#ffffff', small:'#ffffff', hlBg:'#ffffff', hlTx:'#e14b32', accBg:'#ffffff', accTx:'#e14b32', font:'anton', caseMode:'upper', hlMode:'box', grad:['#ffd9a0','#ff7e5f'], sampleSmall:'soft si', sampleBig:'PEACH', sampleKw:'GLOW'},
  {id:'violet', name:'🆕 Violet Storm', desc:'Tilted violet pop with rotating accents and glow — high energy', main:'#ffffff', small:'#ffffff', hlBg:'#7c3aed', hlTx:'#ffffff', accBg:'#06b6d4', accTx:'#111111', font:'anton', caseMode:'upper', hlMode:'box', tilt:0.04, glow:'#8b5cf6', accRotate:['#7c3aed','#06b6d4','#ec4899'], stroke:{c:'#000000',w:0.08}, sampleSmall:'ye hai', sampleBig:'VIOLET', sampleKw:'STORM'},
- {id:'ivory', name:'🆕 Ivory Minimal', desc:'Warm ivory serif, one burnt-orange keyword — minimal editorial', main:'#f7f3ea', small:'#f7f3ea', hlBg:'#e4572e', hlTx:'#f7f3ea', accBg:'#e4572e', accTx:'#f7f3ea', font:'serif', caseMode:'asis', hlMode:'color', kwColor:'#e4572e', sampleSmall:'kam alfaaz', sampleBig:'zyada', sampleKw:'asar'},
+ {id:'ivory', name:'🆕 Ivory Minimal', desc:'Warm ivory serif, one burnt-orange keyword — minimal editorial', main:'#f7f3ea', small:'#f7f3ea', hlBg:'#e4572e', hlTx:'#f7f3ea', accBg:'#e4572e', accTx:'#f7f3ea', font:'serif', caseMode:'asis', hlMode:'color', kwColor:'#e4572e', sampleSmall:'kam alfaaz', sampleBig:'zyada', sampleKw:'asar'},,
+ {id:'karaokecyan', name:'🆕 Karaoke Cyan', desc:'Words fill with cyan as spoken — fresh karaoke podcast look', main:'#ffffff', small:'#ffffff', hlBg:'#22d3ee', hlTx:'#111111', accBg:'#22d3ee', accTx:'#111111', font:'mont', caseMode:'upper', hlMode:'color', kwColor:'#22d3ee', karaoke:true, stroke:{c:'#000000',w:0.09}, sampleSmall:'har word', sampleBig:'CYAN BHARTA', sampleKw:'JATA'},
+ {id:'markerpink', name:'🆕 Marker Pink', desc:'Pink marker sweeps behind the spoken word — explainer style', main:'#ffffff', small:'#ffffff', hlBg:'#ff5ea8', hlTx:'#111111', accBg:'#ff5ea8', accTx:'#ffffff', font:'mont', caseMode:'asis', hlMode:'color', kwColor:'#ffffff', marker:true, sampleSmall:'yeh wala', sampleBig:'point', sampleKw:'dekho'},
+ {id:'retro', name:'🆕 Retro Wave', desc:'80s neon gradient words, tilted — retro synthwave energy', main:'#ffffff', small:'#ffffff', hlBg:'#fffb96', hlTx:'#111111', accBg:'#01cdfe', accTx:'#111111', font:'anton', caseMode:'upper', hlMode:'box', grad:['#ff71ce','#01cdfe'], glow:'#ff71ce', tilt:-0.03, accRotate:['#ff71ce','#01cdfe','#fffb96'], sampleSmall:'purey', sampleBig:'RETRO', sampleKw:'VIBES'},
+ {id:'luxury', name:'🆕 Gold Luxury', desc:'Gold gradient serif — rich, premium, wedding-film classy', main:'#ffffff', small:'#ffffff', hlBg:'#d4af37', hlTx:'#111111', accBg:'#d4af37', accTx:'#111111', font:'serif', caseMode:'asis', hlMode:'color', kwColor:'#d4af37', grad:['#f6d365','#b8860b'], italic:true, sampleSmall:'sirf', sampleBig:'luxury', sampleKw:'feel'},
+ {id:'bubble', name:'🆕 Bubble Pop', desc:'Soft sky-to-pink gradient box, gentle tilt — cute creator pop', main:'#ffffff', small:'#ffffff', hlBg:'#f0abfc', hlTx:'#111111', accBg:'#67e8f9', accTx:'#111111', font:'poppins', caseMode:'lower', hlMode:'gradbox', gradBox:['#67e8f9','#f0abfc'], glow:'#67e8f9', tilt:0.03, sampleSmall:'cute sa', sampleBig:'bubble', sampleKw:'pop'},
+ {id:'cherry', name:'🆕 Cherry Noir', desc:'Cream serif with a hot cherry-red keyword — bold editorial', main:'#fff8ec', small:'#fff8ec', hlBg:'#ff2e4d', hlTx:'#ffffff', accBg:'#ff2e4d', accTx:'#ffffff', font:'serif', caseMode:'asis', hlMode:'color', kwColor:'#ff2e4d', italic:true, sampleSmall:'ek dum', sampleBig:'cherry', sampleKw:'NOIR'},
 ];
 let curStyle=STYLES[0];
 const FONT_CSS={anton:"Anton, Impact, sans-serif", mont:"Montserrat, sans-serif", serif:"'Playfair Display', Georgia, serif", script:"Caveat, cursive", poppins:"Poppins, sans-serif"};
